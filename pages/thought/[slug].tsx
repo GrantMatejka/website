@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { GetStaticProps, GetStaticPaths } from 'next';
 import ReactMarkdown from 'react-markdown';
+import Head from 'next/head';
 
 type ThoughtProps = {
   frontmatter: {
@@ -10,17 +11,23 @@ type ThoughtProps = {
     description: string,
     date: string,
   },
+  slug: string,
   content: string
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function Thought({ content, frontmatter }: ThoughtProps) {
+export default function Thought({ content, slug, frontmatter }: ThoughtProps) {
   return (
+    <div>
+    <Head>
+      <title>{slug}</title>
+    </Head>
     <article>
       <ReactMarkdown>
         {content}
       </ReactMarkdown>
     </article>
+    </div>
   );
 }
 
@@ -68,6 +75,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       content: content,
+      slug: slug,
       frontmatter,
     },
   };
