@@ -64,14 +64,14 @@ return (
           California Polytechnic State University - San Luis Obispo, Software Engineering
         </h3>
         <p>
-          Bachelor's Software Engineering
+          {`Bachelor's Software Engineering`}
           <br />
           Fall 2017 - Spring 2021
           <br />
           GPA: 3.87+
         </p>
         <p>
-          Pursuing Master's in Computer Science
+          {`Pursuing Master's in Computer Science`}
           <br />
           Expected completion Spring 2022
         </p>
@@ -124,9 +124,9 @@ return (
     <div id='interests'>
       <h2>Interests</h2>
       <p>
-        When I'm not coding I enjoy reading books of all genres. Some topics I specifically enjoy to read about are
+        {`When I'm not coding I enjoy reading books of all genres. Some topics I specifically enjoy to read about are
         religious studies, ancient Greece, programming and classics. If reading takes too much energy I usually move
-        over to playing videogames.
+        over to playing videogames.`}
       </p>
       <p>
         After a long day of work I enjoy going outside for a nice walk or taking care of my small garden. Living in San
@@ -135,8 +135,8 @@ return (
       <p>
         Why such a boring site?
         <br />
-        Simply because I didn't think my site needed a bunch of weight (some would say bloat).
-        I'm just writing and stuff so text does fine on its own.
+        {`Simply because I didn't think my site needed a bunch of weight (some would say bloat).
+        I'm just writing and stuff so text does fine on its own.`}
       </p>
       <p>
         For more information feel free to visit my <a href='https://github.com/GrantMatejka'>github</a>, <a href='https://www.linkedin.com/in/grantmatejka/'>LinkedIn</a>, resume or reach out to me!

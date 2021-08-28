@@ -4,6 +4,7 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/Blog.module.css';
+import { ReactElement } from "react";
 
 type BlogProps = {
   posts: {
@@ -17,7 +18,7 @@ type BlogProps = {
 }
 
 
-export default function Blog({ posts }: BlogProps) {
+export default function Blog({ posts }: BlogProps): ReactElement {
   return (
     <div>
       <Head>
@@ -56,7 +57,7 @@ export const getStaticProps: GetStaticProps = async () => {
     // sometimes these get converted to date objects, let's check
     const date = new Date(data.date);
     if (date.toString() != 'Invalid Date') {
-      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const options = { year: 'numeric', month: 'long', day: 'numeric' } as const;
       data.date = date.toLocaleDateString("en-US", options);
     }
 

@@ -21,7 +21,7 @@ return (
     </em></p>
     <h2>Currently Reading: Permanent Record</h2>
     <h2>Currently Reading: The Rust Programming Language</h2>
-    <h3>Books I've Read:</h3>
+    <h3>{`Books I've Read:`}</h3>
     <ol reversed>
       <li>Among Kings</li>
       <li>Life Together</li>
@@ -86,7 +86,7 @@ return (
       <li>Inerrancy and the Gospels</li>
       <li>Christian Ethics and Moral Philosophy</li>
       <li>Spritual Leadership</li>
-      <li>Jonathan Edward's Resolutions and Advice to Young Christians</li>
+      <li>{`Jonathan Edward's Resolutions and Advice to Young Christians`}</li>
       <li>The Texts of the Old Testament</li>
       <li>If Ye Shall Ask</li>
       <li>Reading the Bible Supernaturally</li>
