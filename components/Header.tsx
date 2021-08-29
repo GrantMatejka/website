@@ -1,27 +1,28 @@
-import styles from '../styles/Header.module.css';
-
 import Link from 'next/link';
+import { ReactElement } from 'react';
 
-export default function Header() {
+import styles from '../styles/Header.module.css'
+
+export default function Header(): ReactElement {
   return (
-    <div className={styles.inline_list}>
+    <div className={styles.link_list}>
       <Link href="/">
-        <a className={styles.link}>
+        <a className='link'>
           About
         </a>
       </Link>
       <Link href="/blog">
-        <a className={styles.link}>
+        <a className='link'>
           Thoughts
         </a>
       </Link>
       <Link href="/books">
-        <a className={styles.link}>
+        <a className='link'>
           Readings
         </a>
       </Link>
       <Link href="/bonbon">
-        <a className={styles.link}>
+        <a className='link'>
           BonBon
         </a>
       </Link>

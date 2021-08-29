@@ -1,77 +1,69 @@
-import fs from "fs";
-import matter from "gray-matter";
-import { GetStaticProps } from 'next';
-import Head from 'next/head';
-import Link from 'next/link';
-import styles from '../styles/Blog.module.css';
-import { ReactElement } from "react";
+import fs from 'fs'
+import matter from 'gray-matter'
+import { GetStaticProps } from 'next'
+import Head from 'next/head'
+import Link from 'next/link'
+import { ReactElement } from 'react'
+import parseFrontMatter from '../utils/frontMatterParser'
+import type { FrontMatter } from '../utils/frontMatterParser'
 
-type BlogProps = {
-  posts: {
-    frontmatter: {
-      title: string,
-      description: string,
-      date: string,
-    },
-    slug: string
-  }[]
+interface BlogProps {
+   posts: {
+      frontMatter: FrontMatter
+      slug: string
+   }[]
 }
 
-
 export default function Blog({ posts }: BlogProps): ReactElement {
-  return (
-    <div>
-      <Head>
-        <title>Thoughts</title>
-      </Head>
-      <h1>Some of My Thoughts</h1>
-      {posts.map(({ frontmatter: { title, description, date }, slug }) => (
-        <article key={title} className={styles.card}>
-          <header>
-            <h3>{title}</h3>
-            <span>{date}</span>
-          </header>
-          <section>
-            <Link href={"/thought/[slug]"} as={`/thought/${slug}`}>
-              <a className={styles.btn}>
-                Read -{">"}
-              </a>
-            </Link>
-          </section>
-        </article>
-      ))}
-    </div>
-  );
+   return (
+      <div>
+         <Head>
+            <title>Thoughts</title>
+         </Head>
+         <h1>Some of My Thoughts</h1>
+         <div className="row wrap">
+            {posts.map(
+               ({ frontMatter: { title, description, date }, slug }) => (
+                  <article key={title} className="card">
+                     <header className="centered pb-2">
+                        <h3 className="pb-0 my-0">{title}</h3>
+                        <small>{date}</small>
+                     </header>
+                     <section className="centered">
+                        <Link href={'/thought/[slug]'} as={`/thought/${slug}`}>
+                           <a className="btn-short">Read More</a>
+                        </Link>
+                     </section>
+                  </article>
+               )
+            )}
+         </div>
+      </div>
+   )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  // TODO: should this be sync?
-  const files = fs.readdirSync(`${process.cwd()}/thoughts`);
+   // TODO: should this be sync?
+   const files = fs.readdirSync(`${process.cwd()}/thoughts`)
 
-  const posts = files.map(filename => {
-    const mdAndMeta = fs.readFileSync(`thoughts/${filename}`).toString();
-    const { data } = matter(mdAndMeta);
+   const posts = files.map((filename) => {
+      const mdAndMeta = fs.readFileSync(`thoughts/${filename}`).toString()
+      const { data } = matter(mdAndMeta)
 
-    const slug = filename.replace('.md', '');
+      const slug = filename.replace('.md', '')
+      const parsedData = parseFrontMatter(data)
 
-    // sometimes these get converted to date objects, let's check
-    const date = new Date(data.date);
-    if (date.toString() != 'Invalid Date') {
-      const options = { year: 'numeric', month: 'long', day: 'numeric' } as const;
-      data.date = date.toLocaleDateString("en-US", options);
-    }
-
-    return {
-      slug: slug,
-      frontmatter: {
-        ...data
+      return {
+         slug: slug,
+         frontMatter: {
+            ...parsedData,
+         },
       }
-    }
-  });
+   })
 
-  return {
-    props: {
-      posts
-    }
-  }
+   return {
+      props: {
+         posts,
+      },
+   }
 }
