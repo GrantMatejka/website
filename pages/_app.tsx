@@ -20,7 +20,7 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout): Rea
         {page}
       </div>
     </>;
-  })
+  });
 
   const getLayout = Component.getLayout ?? defaultLayout;
 
