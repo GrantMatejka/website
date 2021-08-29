@@ -1,5 +1,6 @@
 ---
 title: First Thesis Log
+description: First journal entry of my work towards my masters thesis
 date: 2021-08-28
 ---
 

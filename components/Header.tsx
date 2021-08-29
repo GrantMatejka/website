@@ -1,11 +1,9 @@
 import Link from 'next/link';
 import { ReactElement } from 'react';
 
-import styles from '../styles/Header.module.css'
-
 export default function Header(): ReactElement {
   return (
-    <div className={styles.link_list}>
+    <div className='inline_list'>
       <Link href="/">
         <a className='link'>
           About

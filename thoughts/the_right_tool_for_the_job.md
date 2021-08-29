@@ -1,5 +1,6 @@
 ---
 title: The Right Tool for the Job
+description: Just some thoughts and frustrations about hypebeast engineering
 date: 2021-08-28
 ---
 
