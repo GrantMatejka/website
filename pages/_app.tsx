@@ -24,5 +24,5 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout): Rea
 
   const getLayout = Component.getLayout ?? defaultLayout;
 
-  return getLayout(<Component {...pageProps} />)
+  return getLayout(<Component {...pageProps} />);
 }

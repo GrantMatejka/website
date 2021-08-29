@@ -1,11 +1,11 @@
-import fs from 'fs'
-import matter from 'gray-matter'
-import { GetStaticProps } from 'next'
-import Head from 'next/head'
-import Link from 'next/link'
-import { ReactElement } from 'react'
-import parseFrontMatter from '../utils/frontMatterParser'
-import type { FrontMatter } from '../utils/frontMatterParser'
+import fs from 'fs';
+import matter from 'gray-matter';
+import { GetStaticProps } from 'next';
+import Head from 'next/head';
+import Link from 'next/link';
+import { ReactElement } from 'react';
+import parseFrontMatter from '../utils/frontMatterParser';
+import type { FrontMatter } from '../utils/frontMatterParser';
 
 interface BlogProps {
    posts: {
@@ -39,31 +39,31 @@ export default function Blog({ posts }: BlogProps): ReactElement {
             )}
          </div>
       </div>
-   )
+   );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
    // TODO: should this be sync?
-   const files = fs.readdirSync(`${process.cwd()}/thoughts`)
+   const files = fs.readdirSync(`${process.cwd()}/thoughts`);
 
    const posts = files.map((filename) => {
-      const mdAndMeta = fs.readFileSync(`thoughts/${filename}`).toString()
-      const { data } = matter(mdAndMeta)
+      const mdAndMeta = fs.readFileSync(`thoughts/${filename}`).toString();
+      const { data } = matter(mdAndMeta);
 
-      const slug = filename.replace('.md', '')
-      const parsedData = parseFrontMatter(data)
+      const slug = filename.replace('.md', '');
+      const parsedData = parseFrontMatter(data);
 
       return {
          slug: slug,
          frontMatter: {
             ...parsedData,
          },
-      }
-   })
+      };
+   });
 
    return {
       props: {
          posts,
       },
-   }
-}
+   };
+};

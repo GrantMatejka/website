@@ -1,5 +1,5 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
+import type { NextPage } from 'next';
+import Head from 'next/head';
 
 const Home: NextPage = () => {
 return (
@@ -143,6 +143,6 @@ return (
       </p>
     </div>
   </div>);
-}
+};
 
-export default Home
+export default Home;

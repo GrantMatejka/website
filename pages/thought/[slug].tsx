@@ -42,7 +42,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths,
     fallback: false,
   };
-}
+};
 
 export const getStaticProps: GetStaticProps = async (context) => {
   if (!context.params) {
@@ -69,4 +69,4 @@ export const getStaticProps: GetStaticProps = async (context) => {
       frontMatter,
     },
   };
-}
+};
