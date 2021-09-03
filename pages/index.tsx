@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import SiteInfo from '../components/SiteInfo';
 
 const Home: NextPage = () => {
 return (
@@ -142,6 +143,7 @@ return (
         For more information feel free to visit my <a href='https://github.com/GrantMatejka'>github</a>, <a href='https://www.linkedin.com/in/grantmatejka/'>LinkedIn</a>, resume or reach out to me!
       </p>
     </div>
+    <SiteInfo />
   </div>);
 };
 
