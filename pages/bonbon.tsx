@@ -1,4 +1,6 @@
-import { ReactElement, useEffect, useState } from 'react';
+import Head from 'next/head';
+import { FormEvent } from 'react';
+import { FormEventHandler, ReactElement, useEffect, useState } from 'react';
 
 interface Todo {
    date: string
@@ -61,17 +63,61 @@ const Bonbon = (): ReactElement => {
       fullySetTodos(newTodos);
    });
 
+   const clearTodos = () => {
+      setTodos([]);
+      localStorage.setItem('todos', JSON.stringify([]));
+   };
+
+   const todoFormSubmission = ((e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const todos = JSON.parse(localStorage.getItem('todos') ?? '[]');
+      console.log(todos);
+      todos.push('hey');
+
+      fullySetTodos(todos);
+      console.log(e);
+      //TODO: create todo here
+   });
+
    useEffect(() => {
-      // TODO: fix this as it will always set localstorage when initing
-      const storedTodos = JSON.parse(localStorage.getItem('todos') ?? '[]');
-      if (storedTodos.length === 0) {
-         console.log(storedTodos);
+      const storedTodos = localStorage.getItem('todos');
+      if (storedTodos == null) {
          localStorage.setItem('todos', JSON.stringify([]));
+      } else {
+         const parsedTodos = JSON.parse(storedTodos);
+         setTodos(parsedTodos);
       }
-      setTodos(storedTodos);
    }, []);
 
-   return <p>{`I haven't been carried over yet :(`}</p>;
+   return (
+      <div>
+         <Head>
+            <title>Bonbon</title>
+         </Head>
+         <button onClick={() => setDateRange(1)}>Today</button>
+         <button onClick={() => setDateRange(7)}>Week</button>
+         <button onClick={() => setDateRange(14)}>Two Weeks</button>
+         <button onClick={clearTodos}>clear</button>
+         <p>{dateRange}</p>
+
+         <form id="form" autoComplete="off" onSubmit={todoFormSubmission}>
+            <input type="text" id="todo-description" autoComplete="off" />
+            <input type="number" id="input-time" min="1" max="24" />
+            <button id="add-todo" type="submit">
+               Add Event
+            </button>
+         </form>
+
+         <p>{todos.length}</p>
+         {todos.map((e, i) => (
+            <div key={i}>
+               <p>
+                  {i} {e}
+               </p>
+            </div>
+         ))}
+      </div>
+   );
 };
 
 export default Bonbon;
