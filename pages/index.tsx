@@ -2,6 +2,12 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/Index.module.css';
+import {
+   IoLogoLinkedin,
+   IoLogoGithub,
+} from 'react-icons/io';
+import { IoNewspaperOutline } from 'react-icons/io5';
+
 
 const Home: NextPage = () => {
    return (
@@ -20,25 +26,60 @@ const Home: NextPage = () => {
             />
          </Head>
          <div className={styles.mainContent}>
-            <h1>Grant Matejka</h1>
+            <h1 className={styles.title}>Grant Matejka</h1>
             <hr />
+            <div className={styles.iconRow}>
+               <Link href="https://www.linkedin.com/in/grantmatejka/">
+                  <a
+                     rel="noreferrer"
+                     target="_blank"
+                     className={styles.iconLink}
+                  >
+                     <IoLogoLinkedin />
+                  </a>
+               </Link>
+               <Link href="https://github.com/GrantMatejka">
+                  <a
+                     rel="noreferrer"
+                     target="_blank"
+                     className={styles.iconLink}
+                  >
+                     <IoLogoGithub />
+                  </a>
+               </Link>
+               <Link href="/GrantMatejkaResume.pdf">
+                  <a
+                     rel="noreferrer"
+                     target="_blank"
+                     className={styles.iconLink}
+                  >
+                     <IoNewspaperOutline />
+                  </a>
+               </Link>
+            </div>
 
-            <h3>{"Master's Student and Software Engineer"}</h3>
-            <h3>
-               Student, Web Developer, WebAssembly Believer, Part Time Fixer
+            <h3 className={styles.text}>
+               {"Master's Student and Software Engineer"}
+            </h3>
+            <h3 className={styles.text}>
+               {'Student, Web Developer, WebAssembly Believer, Part Time Fixer'}
             </h3>
 
-            <h2>
+            <div className={styles.text}>
                <Link href="/thoughts/about_me">
-                  <a>about me</a>
+                  <a className={styles.link}>More About Me</a>
                </Link>
-            </h2>
-            <h5>
-               Welcome to my site, feel free to explore and learn more{' '}
+            </div>
+            <h3>
+               Welcome, feel free to{' '}
+               <Link href="/blog">
+                  <a className={styles.linkSmall}>explore</a>
+               </Link>{' '}
+               and learn more{' '}
                <Link href="/thoughts/about_me">
-                  <a>about me</a>
+                  <a className={styles.linkSmall}>about me.</a>
                </Link>
-            </h5>
+            </h3>
          </div>
       </div>
    );

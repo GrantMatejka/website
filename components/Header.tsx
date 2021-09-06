@@ -41,15 +41,15 @@ export default function Header(): ReactElement {
                         </a>
                      </Link>
                      {', '}
-                     <Link href="/GrantMatejkaResume.pdf">
-                        <a rel="noreferrer" target="_blank">
-                           Resume
-                        </a>
-                     </Link>
-                     {', '}
                      <Link href="https://github.com/GrantMatejka">
                         <a rel="noreferrer" target="_blank">
                            GitHub
+                        </a>
+                     </Link>
+                     {', '}
+                     <Link href="/GrantMatejkaResume.pdf">
+                        <a rel="noreferrer" target="_blank">
+                           Resume
                         </a>
                      </Link>
                   </span>

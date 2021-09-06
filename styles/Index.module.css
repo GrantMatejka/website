@@ -1,3 +1,65 @@
 .mainContent {
   text-align: center;
 }
+
+.title {
+  text-transform: uppercase;
+  font-size: 5em;
+}
+
+@media only screen and (max-width: 600px) {
+  .title {
+    font-size: 4em;
+  }
+}
+
+.text {
+  font-size: 1.75em;
+  padding: 0.5em;
+}
+
+.iconRow {
+  padding-top: 2.5em;
+}
+
+.link {
+  text-transform: capitalize;
+  font-size: 1.5em;
+  text-decoration: none;
+  color: #1F2833;
+}
+
+.link:visited {
+  color: #1F2833;
+}
+
+.link:hover {
+  color: #808080;
+}
+
+.linkSmall {
+  text-decoration: none;
+  color: #1F2833;
+}
+
+.linkSmall:visited {
+  color: #1F2833;
+}
+
+.linkSmall:hover {
+  color: #808080;
+}
+
+.iconLink {
+  font-size: 4.5em;
+  text-decoration: none;
+  color: #1F2833;
+}
+
+.iconLink:visited {
+  color: #1F2833;
+}
+
+.iconLink:hover {
+  color: #808080;
+}
