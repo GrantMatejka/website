@@ -3,8 +3,10 @@ import { ReactElement } from 'react';
 import styles from '../styles/Header.module.css';
 import { CgPushChevronDown, CgPushChevronUp } from 'react-icons/cg';
 import { useState } from 'react';
+import useWindowDimensions from '../utils/windowDimensions';
 
 export default function Header(): ReactElement {
+   const { width } = useWindowDimensions();
    const [open, setOpen] = useState(true);
 
    const toggleOpen = () => {
@@ -13,10 +15,10 @@ export default function Header(): ReactElement {
 
    return (
       <header>
-         {open ? (
+         {open || width > 600 ? (
             <div className={styles.container}>
                <Link href="/">
-                  <a className={styles.link}>About</a>
+                  <a className={styles.link}>Home</a>
                </Link>
                <Link href="/blog">
                   <a className={styles.link}>Thoughts</a>
@@ -33,7 +35,7 @@ export default function Header(): ReactElement {
                      grantmatejka1@gmail.com
                   </a>
                   <span>
-                     <Link href="https://www.linkedin.com/grantmatejka">
+                     <Link href="https://www.linkedin.com/in/grantmatejka/">
                         <a rel="noreferrer" target="_blank">
                            LinkedIn
                         </a>
@@ -45,7 +47,7 @@ export default function Header(): ReactElement {
                         </a>
                      </Link>
                      {', '}
-                     <Link href="https://www.github.com/grantmatejka">
+                     <Link href="https://github.com/GrantMatejka">
                         <a rel="noreferrer" target="_blank">
                            GitHub
                         </a>
