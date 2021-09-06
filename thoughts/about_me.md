@@ -2,7 +2,7 @@
 title: About Me
 description: Some Info and Background on who I am
 date: 2021-09-01
-featured: yes
+tags: featured
 ---
 # About Me
 
