@@ -66,7 +66,7 @@ const Home: NextPage = () => {
             </h3>
 
             <div className={styles.text}>
-               <Link href="/thoughts/about_me">
+               <Link href="/thought/about_me">
                   <a className={styles.link}>More About Me</a>
                </Link>
             </div>
@@ -76,7 +76,7 @@ const Home: NextPage = () => {
                   <a className={styles.linkSmall}>explore</a>
                </Link>{' '}
                and learn more{' '}
-               <Link href="/thoughts/about_me">
+               <Link href="/thought/about_me">
                   <a className={styles.linkSmall}>about me.</a>
                </Link>
             </h3>
