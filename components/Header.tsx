@@ -26,9 +26,6 @@ export default function Header(): ReactElement {
                <Link href="/books">
                   <a className={styles.link}>Readings</a>
                </Link>
-               <Link href="/bonbon">
-                  <a className={styles.link}>BonBon</a>
-               </Link>
                <div className={styles.contact}>
                   <span>Grant Matejka</span>
                   <a href="mailto: grantmatejka1@gmail.com">
