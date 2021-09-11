@@ -1,13 +1,28 @@
+:root {
+  --light-bg: #ececec;
+  --dark-bg: #023047;
+  --text-on-dark: #ececec;
+  --text-on-light: #292f33;
+  --llb: #8ecae6;
+  --lb: #219ebc;
+  --y: #ffb703;
+  --o: #fb8500;
+}
+
 html,
 body {
-  background-color: #eaeaf1;
-  color: #0c0c0c;
+  background-color: var(--light-bg);
+  color: var(--text-on-light);
 
   padding: 0;
   padding-bottom: 0.5em;
   margin: 0;
 
   font-family: 'Nunito Sans', sans-serif;
+}
+
+.yellow {
+  color: var(--y);
 }
 
 a {

@@ -32,11 +32,11 @@
   text-transform: capitalize;
   font-size: 1.5em;
   text-decoration: none;
-  color: #1F2833;
+  color: var(--text-on-light);
 }
 
 .link:visited {
-  color: #1F2833;
+  color: var(--text-on-light);
 }
 
 .link:hover {
@@ -45,11 +45,11 @@
 
 .linkSmall {
   text-decoration: none;
-  color: #1F2833;
+  color: var(--text-on-light);
 }
 
 .linkSmall:visited {
-  color: #1F2833;
+  color: var(--text-on-light);
 }
 
 .linkSmall:hover {
@@ -59,11 +59,11 @@
 .iconLink {
   font-size: 4.5em;
   text-decoration: none;
-  color: #1F2833;
+  color: var(--text-on-light);
 }
 
 .iconLink:visited {
-  color: #1F2833;
+  color: var(--text-on-light);
 }
 
 .iconLink:hover {

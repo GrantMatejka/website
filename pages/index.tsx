@@ -25,7 +25,7 @@ const Home: NextPage = () => {
             <div>
                <h1 className={styles.title}>Grant Matejka</h1>
                <h3 className={styles.text}>
-                  {'Student, Engineer, WebAssembly Believer, Part-Time Fixer'}
+                  {'Student - Engineer - WebAssembly Believer - Part Time Fixer'}
                </h3>
                <hr />
                <div className={styles.iconRow}>
