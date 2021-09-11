@@ -5,6 +5,34 @@ import { CgPushChevronDown, CgPushChevronUp } from 'react-icons/cg';
 import { useState } from 'react';
 import useWindowDimensions from '../utils/windowDimensions';
 
+const ContactInfo = (): ReactElement => {
+   return (
+      <div className={styles.contact}>
+         <span>Grant Matejka</span>
+         <a href="mailto: grantmatejka1@gmail.com">grantmatejka1@gmail.com</a>
+         <span>
+            <Link href="https://www.linkedin.com/in/grantmatejka/">
+               <a rel="noreferrer" target="_blank">
+                  LinkedIn
+               </a>
+            </Link>
+            {', '}
+            <Link href="https://github.com/GrantMatejka">
+               <a rel="noreferrer" target="_blank">
+                  GitHub
+               </a>
+            </Link>
+            {', '}
+            <Link href="/GrantMatejkaResume.pdf">
+               <a rel="noreferrer" target="_blank">
+                  Resume
+               </a>
+            </Link>
+         </span>
+      </div>
+   );
+};
+
 export default function Header(): ReactElement {
    const { width } = useWindowDimensions();
    const [open, setOpen] = useState(true);
@@ -13,9 +41,11 @@ export default function Header(): ReactElement {
       setOpen(!open);
    };
 
+   const isNotMobile = width > 600;
+
    return (
       <header>
-         {open || width > 600 ? (
+         {open || isNotMobile ? (
             <div className={styles.container}>
                <Link href="/">
                   <a className={styles.link}>Home</a>
@@ -26,31 +56,7 @@ export default function Header(): ReactElement {
                <Link href="/books">
                   <a className={styles.link}>Readings</a>
                </Link>
-               <div className={styles.contact}>
-                  <span>Grant Matejka</span>
-                  <a href="mailto: grantmatejka1@gmail.com">
-                     grantmatejka1@gmail.com
-                  </a>
-                  <span>
-                     <Link href="https://www.linkedin.com/in/grantmatejka/">
-                        <a rel="noreferrer" target="_blank">
-                           LinkedIn
-                        </a>
-                     </Link>
-                     {', '}
-                     <Link href="https://github.com/GrantMatejka">
-                        <a rel="noreferrer" target="_blank">
-                           GitHub
-                        </a>
-                     </Link>
-                     {', '}
-                     <Link href="/GrantMatejkaResume.pdf">
-                        <a rel="noreferrer" target="_blank">
-                           Resume
-                        </a>
-                     </Link>
-                  </span>
-               </div>
+               <ContactInfo />
                <button className={styles.mobileBtn} onClick={toggleOpen}>
                   <CgPushChevronUp />
                </button>
