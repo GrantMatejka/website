@@ -1,5 +1,6 @@
 :root {
   --light-bg: #ececec;
+  --medium-bg: #8fa3ad;
   --dark-bg: #023047;
   --text-on-dark: #ececec;
   --text-on-light: #292f33;
@@ -102,6 +103,7 @@ a:hover {
   transition: 0.3s;
   border-radius: 5px;
 
+  background-color: var(--light-bg);
   padding: 1em;
 
   min-width: 250px;

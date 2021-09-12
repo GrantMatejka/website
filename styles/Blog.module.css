@@ -1,0 +1,12 @@
+.featuredContainer {
+  background-color: var(--medium-bg);
+  border-radius: 0.65em;
+
+  padding: 1em;
+  margin: 1em;
+}
+
+.featuredContainer h2 {
+  margin: 0;
+  padding-bottom: 0.5em;
+}
