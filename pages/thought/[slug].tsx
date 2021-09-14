@@ -15,11 +15,11 @@ type ThoughtProps = {
 };
 
 export default function Thought({ content, slug, frontMatter }: ThoughtProps): ReactElement {
-  console.log(frontMatter);
   return (
     <div>
     <Head>
-      <title>{slug}</title>
+      <title>{frontMatter.title}</title>
+      <meta name="description">{frontMatter.description}</meta>
     </Head>
     <article>
       <ReactMarkdown>

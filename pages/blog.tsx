@@ -8,69 +8,59 @@ import parseFrontMatter from '../utils/frontMatterParser';
 import type { FrontMatter } from '../utils/frontMatterParser';
 import style from '../styles/Blog.module.css';
 
-interface BlogProps {
-   posts: {
-      frontMatter: FrontMatter;
-      slug: string;
-   }[];
-   featuredPosts: {
-      frontMatter: FrontMatter;
-      slug: string;
-   }[];
+interface Post {
+   frontMatter: FrontMatter;
+   slug: string;
 }
 
-export default function Blog({ posts, featuredPosts }: BlogProps): ReactElement {
+interface BlogProps {
+   posts: Post[];
+   featuredPosts: Post[];
+}
+
+const displayPostCards = (posts: Post[]) => {
+   return (
+      <div className="row wrap">
+         {posts.map(({ frontMatter: { title, description, date }, slug }) => (
+            <article key={title} className={style.card}>
+               <header className="centered pb-2">
+                  <h3 className="pb-0 my-0">{title}</h3>
+                  <small>{description}</small>
+                  <br />
+                  <small>{date}</small>
+               </header>
+               <section className="centered">
+                  <Link href={'/thought/[slug]'} as={`/thought/${slug}`}>
+                     <a className="btn-short">Read More</a>
+                  </Link>
+               </section>
+            </article>
+         ))}
+      </div>
+   );
+};
+
+export default function Blog({
+   posts,
+   featuredPosts,
+}: BlogProps): ReactElement {
    return (
       <div>
          <Head>
             <title>Thoughts</title>
          </Head>
-         <h1>Some of My Thoughts</h1>
          <div className={style.featuredContainer}>
-            <h2>Featured</h2>
-            <div className="row wrap">
-               {featuredPosts.map(
-                  ({ frontMatter: { title, description, date }, slug }) => (
-                     <article key={title} className="card">
-                        <header className="centered pb-2">
-                           <h3 className="pb-0 my-0">{title}</h3>
-                           <small>{date}</small>
-                        </header>
-                        <section className="centered">
-                           <Link href={'/thought/[slug]'} as={`/thought/${slug}`}>
-                              <a className="btn-short">Read More</a>
-                           </Link>
-                        </section>
-                     </article>
-                  )
-               )}
-            </div>
+            <h1 className={style.featuredTitle}>Really Cool Ones</h1>
+            {displayPostCards(featuredPosts)}
          </div>
          <hr />
-         <div className="row wrap">
-            {posts.map(
-               ({ frontMatter: { title, description, date }, slug }) => (
-                  <article key={title} className="card">
-                     <header className="centered pb-2">
-                        <h3 className="pb-0 my-0">{title}</h3>
-                        <small>{date}</small>
-                     </header>
-                     <section className="centered">
-                        <Link href={'/thought/[slug]'} as={`/thought/${slug}`}>
-                           <a className="btn-short">Read More</a>
-                        </Link>
-                     </section>
-                  </article>
-               )
-            )}
-         </div>
+         {displayPostCards(posts)}
       </div>
    );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
    // TODO: should this be synchronous?
-   // TODO: order by something
    const files = fs.readdirSync(`${process.cwd()}/thoughts`);
 
    const posts = [];
@@ -94,6 +84,10 @@ export const getStaticProps: GetStaticProps = async () => {
          posts.push(post);
       }
    }
+
+   // man this is gross, figure out this date crap
+   posts.sort((a, b) => a.frontMatter.date == undefined ? -1 : b.frontMatter.date == undefined ? 1 : a.frontMatter.date > b.frontMatter.date ? -1 : 1);
+   featuredPosts.sort((a, b) => a.frontMatter.date == undefined ? -1 : b.frontMatter.date == undefined ? 1 : a.frontMatter.date > b.frontMatter.date ? -1 : 1);
 
    return {
       props: {
