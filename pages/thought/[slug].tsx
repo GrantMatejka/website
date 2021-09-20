@@ -19,7 +19,7 @@ export default function Thought({ content, slug, frontMatter }: ThoughtProps): R
     <div>
     <Head>
       <title>{frontMatter.title}</title>
-      <meta name="description">{frontMatter.description}</meta>
+      <meta name="description" content="frontMatter.description" />
     </Head>
     <article>
       <ReactMarkdown>
