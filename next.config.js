@@ -4,5 +4,11 @@ module.exports = {
   i18n: {
     locales: ['en-US'],
     defaultLocale: 'en-US'
+  },
+  webpack(config) {
+    config.experiments = {
+      asyncWebAssembly: true
+    };
+    return config;
   }
 };
