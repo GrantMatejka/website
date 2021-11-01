@@ -1,85 +1,92 @@
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+import { useEffect, useState, useMemo } from 'react';
+
+const Canvas = dynamic(() => import('../components/Canvas'), { ssr: false });
+
+const CELL_SIZE = 6; //px
+
+const loadWasmInstance = async (importObject) => {
+   const fetchPromise = fetch('game-of-life.wasm');
+   const { instance } = await WebAssembly.instantiateStreaming(
+      fetchPromise,
+      importObject
+   );
+   return instance;
+};
 
 const GameOfLife = () => {
-   let [client, setClient] = useState(false);
+   let [instance, setInstance] = useState(null);
+
+   const memory = useMemo(() => new WebAssembly.Memory({ initial: 1 }), []);
+   let gridHeight = instance?.exports.get_grid_height() ?? 0;
+   let gridWidth = instance?.exports.get_grid_width() ?? 0;
+   const cellsStartPtr = instance?.exports.get_cell_start_index() ?? null;
+
    useEffect(() => {
-      setClient(true);
-   }, [client]);
+      // store cell in memory and just loop through and 0 is dead and 1 is alive
+      // 'initial: 1' == one page of memory
+      const importObject = {
+         env: {
+            memory: memory,
+         },
+      };
 
-   // store cell in memory and just loop through and 0 is dead and 1 is alive
-   // one page should be plenty
-   const memory = new WebAssembly.Memory({ initial: 1 });
-   const importObject = {
-      env: {
-         memory: memory,
-      },
-   };
-   const module = async () => {
-      const fetchPromise = fetch('game-of-life.wasm');
-      const { instance } = await WebAssembly.instantiateStreaming(
-         fetchPromise,
-         importObject
-      );
-      return instance.exports;
-   };
+      loadWasmInstance(importObject).then((inst) => setInstance(inst));
+   }, [memory]);
 
-   if (client) {
-      const CELL_SIZE = 6;
+   const drawGridAndCells = (context) => {
       const DEAD = 0;
       const ALIVE = 1;
       const GRID_COLOR = '#CCCCCC';
       const DEAD_COLOR = '#FFFFFF';
       const ALIVE_COLOR = '#000000';
 
-      const initCanvas = (height, width) => {
-         const canvas = document.getElementById('game-of-life-canvas');
+      // Draw Grid
+      context.beginPath();
+      context.strokeStyle = GRID_COLOR;
 
-         if (canvas == null) {
-            console.error('No canvas available');
-            return;
-         }
+      console.log(gridWidth);
+      console.log(gridHeight);
 
-         canvas.height = (CELL_SIZE + 1) * height + 1;
-         canvas.width = (CELL_SIZE + 1) * width + 1;
+      // vertical
+      for (let i = 0; i <= gridWidth; i++) {
+         context.moveTo(i * (CELL_SIZE + 1) + 1, 0);
+         context.lineTo(
+            i * (CELL_SIZE + 1) + 1,
+            (CELL_SIZE + 1) * gridHeight + 1
+         );
+      }
 
-         return canvas.getContext('2d');
-      };
+      // horizontal
+      for (let j = 0; j <= gridHeight; j++) {
+         context.moveTo(0, j * (CELL_SIZE + 1) + 1);
+         context.lineTo(
+            (CELL_SIZE + 1) * gridWidth + 1,
+            j * (CELL_SIZE + 1) + 1
+         );
+      }
 
-      const drawGrid = (ctx, height, width) => {
-         ctx.beginPath();
-         ctx.strokeStyle = GRID_COLOR;
+      context.stroke();
 
-         // vert
-         for (let i = 0; i <= width; i++) {
-            ctx.moveTo(i * (CELL_SIZE + 1) + 1, 0);
-            ctx.lineTo(i * (CELL_SIZE + 1) + 1, (CELL_SIZE + 1) * height + 1);
-         }
+      // Draw Cells
+      if (cellsStartPtr) {
+         const cells = new Uint8Array(
+            memory.buffer,
+            cellsStartPtr,
+            gridWidth * gridHeight
+         );
+         context.beginPath();
 
-         // horiz
-         for (let j = 0; j <= height; j++) {
-            ctx.moveTo(0, j * (CELL_SIZE + 1) + 1);
-            ctx.lineTo((CELL_SIZE + 1) * width + 1, j * (CELL_SIZE + 1) + 1);
-         }
+         for (let row = 0; row < gridHeight; row++) {
+            for (let col = 0; col < gridWidth; col++) {
+               // index of cell in grid
+               const idx = row * gridWidth + col;
 
-         ctx.stroke();
-      };
+               context.fillStyle =
+                  cells[idx] === DEAD ? DEAD_COLOR : ALIVE_COLOR;
 
-      const getIndex = (row, column, width) => {
-         return row * width + column;
-      };
-
-      const drawCells = (ctx, cellsPtr, height, width) => {
-         const cells = new Uint8Array(memory.buffer, cellsPtr, width * height);
-         ctx.beginPath();
-
-         for (let row = 0; row < height; row++) {
-            for (let col = 0; col < width; col++) {
-               const idx = getIndex(row, col, width);
-
-               ctx.fillStyle = cells[idx] === DEAD ? DEAD_COLOR : ALIVE_COLOR;
-
-               ctx.fillRect(
+               context.fillRect(
                   col * (CELL_SIZE + 1) + 1,
                   row * (CELL_SIZE + 1) + 1,
                   CELL_SIZE,
@@ -88,89 +95,33 @@ const GameOfLife = () => {
             }
          }
 
-         ctx.stroke();
-      };
+         context.stroke();
+      }
+   };
 
-      const executeGame = () => {
-         module().then((wasmExports) => {
-            document.getElementById('num-input').value = wasmExports.get_grid_height();
-
-            wasmExports.init_cells();
-            let height = wasmExports.get_grid_height();
-            let width = wasmExports.get_grid_width();
-
-            const cellsStartPtr = wasmExports.get_cell_start_index();
-
-            let canvasContext = initCanvas(height, width);
-
-            document.getElementById('num-input').addEventListener('change', (e) => {
-               const val = parseInt(e.target.value);
-               if (val <= 0 || val > 500) {
-                  return;
-               }
-               wasmExports.set_grid_height(val);
-               wasmExports.set_grid_width(val);
-               height = wasmExports.get_grid_height();
-               width = wasmExports.get_grid_width();
-               canvasContext = initCanvas(height, width);
-               drawGrid(canvasContext, height, width);
-               drawCells(canvasContext, cellsStartPtr, height, width);
-            });
-
-            let fpsOut = 0;
-            let lastLoop = new Date();
-            const renderLoop = () => {
-               // super jank fps
-               let thisLoop = new Date();
-               let fps = 1000 / (thisLoop - lastLoop);
-               fpsOut += fps / 30;
-               lastLoop = thisLoop;
-
-               // these may change from one render to another
-               let height = wasmExports.get_grid_height();
-               let width = wasmExports.get_grid_width();
-
-               wasmExports.tick();
-               drawGrid(canvasContext, height, width);
-               drawCells(canvasContext, cellsStartPtr, height, width);
-
-               setTimeout(() => {
-                  requestAnimationFrame(renderLoop);
-               }, 50);
-            };
-
-            setInterval(() => {
-               document.getElementById('fps').innerText = fpsOut.toFixed(2);
-               fpsOut = 0;
-            }, 500);
-
-            drawGrid(canvasContext, height, width);
-            drawCells(canvasContext, cellsStartPtr, height, width);
-            //addEventListener('click', () => requestAnimationFrame(renderLoop));
-            requestAnimationFrame(renderLoop);
-         });
-      };
-
-      executeGame();
-
-      return (
-         <div>
-            <Head>
-               <title>WebAssembly Game of Life</title>
-            </Head>
-            <div className="row">
-               <input type="number" max="250" min="1" id="num-input" />
-               <h4>Click to start</h4>
-               <span id="fps"></span>
-            </div>
-            <div className="row">
-               <canvas id="game-of-life-canvas"></canvas>
-            </div>
-         </div>
-      );
-   } else {
-      return <p>Please wait</p>;
+   if (instance) {
+      instance.exports.init_cells();
    }
+
+   return (
+      <div>
+         <Head>
+            <title>WebAssembly Game of Life</title>
+         </Head>
+
+         <div className="row" style={{paddingTop: '1em'}}>
+            {instance && (
+               <Canvas
+                  width={(CELL_SIZE + 1) * gridWidth + 1}
+                  height={(CELL_SIZE + 1) * gridHeight + 1}
+                  setup={drawGridAndCells}
+                  tick={instance.exports.tick}
+                  timeout={50}
+               />
+            )}
+         </div>
+      </div>
+   );
 };
 
 export default GameOfLife;
