@@ -2,7 +2,6 @@
 title: Ironing out the Report
 description: Reflections on the summer of wasm
 date: 2021-09-12
-tags: featured
 ---
 
 # Finalizing the Report

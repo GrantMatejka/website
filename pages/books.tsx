@@ -26,11 +26,10 @@ return (
          </em>
       </p>
       <h2>Currently Reading: The Meaning of Marriage</h2>
-      <h2>
-         Currently Reading: An Elegant Puzzle - Systems of Engineering Management
-      </h2>
+      <h2>Currently Reading: Renovation of the Heart</h2>
       <h3>{`Books I've Read:`}</h3>
       <ol reversed>
+         <li>An Elegant Puzzle - Systems of Engineering Management</li>
          <li>Press Reset</li>
          <li>Permanent Record</li>
          <li>Among Kings</li>

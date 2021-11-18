@@ -18,9 +18,7 @@ const Home: NextPage = () => {
          <div className={styles.mainContent}>
             <div>
                <h1 className={styles.title}>Grant Matejka</h1>
-               <h3 className={styles.text}>
-                  {'Student - Engineer - WebAssembly Believer - Part Time Fixer'}
-               </h3>
+               <h3 className={styles.text}>{'Student & Engineer'}</h3>
                <hr />
                <div className={styles.iconRow}>
                   <Link href="https://www.linkedin.com/in/grantmatejka/">
