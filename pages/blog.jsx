@@ -6,43 +6,35 @@ import matter from 'gray-matter';
 import parseFrontMatter from '../utils/frontMatterParser';
 import style from '../styles/Blog.module.css';
 
-const displayPostCards = (posts) => {
+const PostCard = ({ frontMatter: { title, description, date }, slug }) => {
    return (
-      <div className="row wrap">
-         {posts.map(({ frontMatter: { title, description, date }, slug }) => (
-            <article key={title} className={style.card}>
-               <header className="centered pb-2">
-                  <h3 className="pb-0 my-0">{title}</h3>
-                  <small>{description}</small>
-                  <br />
-                  <small>{date}</small>
-               </header>
-               <section className="centered">
-                  <Link href={'/thought/[slug]'} as={`/thought/${slug}`}>
-                     <a className="btn-short">Read More</a>
-                  </Link>
-               </section>
-            </article>
-         ))}
-      </div>
+      <article key={title} className={style.card}>
+         <header className="centered pb-2">
+            <h3 className="pb-0 my-0">{title}</h3>
+            <small>{description}</small>
+            <br />
+            <small>{date}</small>
+         </header>
+         <section className="centered">
+            <Link href={'/thought/[slug]'} as={`/thought/${slug}`}>
+               <a className="btn-short">Read More</a>
+            </Link>
+         </section>
+      </article>
    );
 };
 
 export default function Blog({
    posts,
-   featuredPosts,
 }) {
    return (
       <div>
          <Head>
             <title>Thoughts</title>
          </Head>
-         <div className={style.featuredContainer}>
-            <h1 className={style.featuredTitle}>Really Cool Ones</h1>
-            {displayPostCards(featuredPosts)}
+         <div className="row wrap">
+            {posts.map((post) => <PostCard {...post} />)}
          </div>
-         <hr />
-         {displayPostCards(posts)}
       </div>
    );
 }
@@ -52,7 +44,6 @@ export const getStaticProps = async () => {
    const files = fs.readdirSync(`${process.cwd()}/thoughts`);
 
    const posts = [];
-   const featuredPosts = [];
    for (const filename of files) {
       const mdAndMeta = fs.readFileSync(`thoughts/${filename}`).toString();
       const { data } = matter(mdAndMeta);
@@ -66,21 +57,16 @@ export const getStaticProps = async () => {
             ...parsedData,
          },
       };
-      if (parsedData.tags && parsedData.tags.includes('featured')) {
-         featuredPosts.push(post);
-      } else {
-         posts.push(post);
-      }
+
+      posts.push(post);
    }
 
    // man this is gross, figure out this date crap
    posts.sort((a, b) => a.frontMatter.date == undefined ? -1 : b.frontMatter.date == undefined ? 1 : a.frontMatter.date > b.frontMatter.date ? -1 : 1);
-   featuredPosts.sort((a, b) => a.frontMatter.date == undefined ? -1 : b.frontMatter.date == undefined ? 1 : a.frontMatter.date > b.frontMatter.date ? -1 : 1);
 
    return {
       props: {
          posts,
-         featuredPosts,
       },
    };
 };

@@ -52,9 +52,6 @@ export default function Header() {
                <Link href="/blog">
                   <a className={styles.link}>Thoughts</a>
                </Link>
-               <Link href="/books">
-                  <a className={styles.link}>Readings</a>
-               </Link>
                <ContactInfo />
                <button className={styles.mobileBtn} onClick={toggleOpen}>
                   <CgPushChevronUp />
