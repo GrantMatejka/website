@@ -1,13 +1,6 @@
-import Head from 'next/head';
-import { FormEvent } from 'react';
-import { FormEventHandler, ReactElement, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-interface Todo {
-   date: string
-   text: string
-   dueTime: string
-   id?: number
-}
+import Head from 'next/head';
 
 let count = 0;
 
@@ -21,7 +14,7 @@ const daysOfWeek = [
    'Saturday',
 ];
 
-const createNewTodo = (text: string, dueTime: string): Todo => {
+const createNewTodo = (text, dueTime) => {
    const creationDate = new Date();
 
    const newTodo = {
@@ -36,13 +29,13 @@ const createNewTodo = (text: string, dueTime: string): Todo => {
    return newTodo;
 };
 
-const Bonbon = (): ReactElement => {
+const Bonbon = () => {
    const [dateRange, setDateRange] = useState(15);
-   const [todos, setTodos] = useState<Todo[]>([]);
+   const [todos, setTodos] = useState([]);
 
-   const fullySetTodos = ((newTodos: Todo[], sort = false) => {
+   const fullySetTodos = ((newTodos, sort = false) => {
       if (sort) {
-         const todoSorter = (t1: Todo, t2: Todo) => {
+         const todoSorter = (t1, t2) => {
             const greater = t1.date.toString().substring(0, 15) < t2.date.toString().substring(0, 15);
             if (greater) return -1;
             if (!greater) return 1;
@@ -58,7 +51,7 @@ const Bonbon = (): ReactElement => {
       setTodos(newTodos);
    });
 
-   const removeTodo = ((id: number) => {
+   const removeTodo = ((id) => {
       const newTodos = todos.filter((el) => el.id !== id);
       fullySetTodos(newTodos);
    });
@@ -68,7 +61,7 @@ const Bonbon = (): ReactElement => {
       localStorage.setItem('todos', JSON.stringify([]));
    };
 
-   const todoFormSubmission = ((e: FormEvent<HTMLFormElement>) => {
+   const todoFormSubmission = ((e) => {
       e.preventDefault();
       const todos = JSON.parse(localStorage.getItem('todos') ?? '[]');
       console.log(todos);

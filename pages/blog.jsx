@@ -1,24 +1,12 @@
-import fs from 'fs';
-import matter from 'gray-matter';
-import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { ReactElement } from 'react';
+import React from 'react';
+import fs from 'fs';
+import matter from 'gray-matter';
 import parseFrontMatter from '../utils/frontMatterParser';
-import type { FrontMatter } from '../utils/frontMatterParser';
 import style from '../styles/Blog.module.css';
 
-interface Post {
-   frontMatter: FrontMatter;
-   slug: string;
-}
-
-interface BlogProps {
-   posts: Post[];
-   featuredPosts: Post[];
-}
-
-const displayPostCards = (posts: Post[]) => {
+const displayPostCards = (posts) => {
    return (
       <div className="row wrap">
          {posts.map(({ frontMatter: { title, description, date }, slug }) => (
@@ -43,7 +31,7 @@ const displayPostCards = (posts: Post[]) => {
 export default function Blog({
    posts,
    featuredPosts,
-}: BlogProps): ReactElement {
+}) {
    return (
       <div>
          <Head>
@@ -59,8 +47,8 @@ export default function Blog({
    );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-   // TODO: should this be synchronous?
+export const getStaticProps = async () => {
+   // TODO: should this be asynchronous?
    const files = fs.readdirSync(`${process.cwd()}/thoughts`);
 
    const posts = [];

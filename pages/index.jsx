@@ -1,11 +1,11 @@
-import type { NextPage } from 'next';
+import { IoLogoGithub, IoLogoLinkedin } from 'react-icons/io';
+
 import Head from 'next/head';
+import { IoNewspaperOutline } from 'react-icons/io5';
 import Link from 'next/link';
 import styles from '../styles/Index.module.css';
-import { IoLogoLinkedin, IoLogoGithub } from 'react-icons/io';
-import { IoNewspaperOutline } from 'react-icons/io5';
 
-const Home: NextPage = () => {
+const Home = () => {
    return (
       <div>
          <Head>
@@ -18,7 +18,7 @@ const Home: NextPage = () => {
          <div className={styles.mainContent}>
             <div>
                <h1 className={styles.title}>Grant Matejka</h1>
-               <h3 className={styles.text}>{'Student & Engineer'}</h3>
+               <h3 className={styles.text}>{'Sofware Engineer'}</h3>
                <hr />
                <div className={styles.iconRow}>
                   <Link href="https://www.linkedin.com/in/grantmatejka/">

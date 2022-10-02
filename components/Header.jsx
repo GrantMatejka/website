@@ -1,15 +1,14 @@
-import Link from 'next/link';
-import { ReactElement } from 'react';
-import styles from '../styles/Header.module.css';
 import { CgPushChevronDown, CgPushChevronUp } from 'react-icons/cg';
+
+import Link from 'next/link';
+import styles from '../styles/Header.module.css';
 import { useState } from 'react';
 import useWindowDimensions from '../utils/windowDimensions';
 
-const ContactInfo = (): ReactElement => {
+const ContactInfo = () => {
    return (
       <div className={styles.contact}>
-         <span>Grant Matejka</span>
-         <a href="mailto: grantmatejka1@gmail.com">grantmatejka1@gmail.com</a>
+         <a href="mailto:grantmatejka1@gmail.com">grantmatejka1@gmail.com</a>
          <span>
             <Link href="https://www.linkedin.com/in/grantmatejka/">
                <a rel="noreferrer" target="_blank">
@@ -33,9 +32,9 @@ const ContactInfo = (): ReactElement => {
    );
 };
 
-export default function Header(): ReactElement {
+export default function Header() {
    const { width } = useWindowDimensions();
-   const [open, setOpen] = useState(true);
+   const [open, setOpen] = useState(false);
 
    const toggleOpen = () => {
       setOpen(!open);

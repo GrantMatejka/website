@@ -1,19 +1,10 @@
-import React, { useRef, useEffect, ReactElement, useCallback } from 'react';
-
-interface CanvasProps {
-   setup: CallableFunction;
-   tick: CallableFunction;
-   timeout: number;
-   width: number | undefined;
-   height: number | undefined;
-   rest?: unknown;
-}
+import React, { useCallback, useEffect, useRef } from 'react';
 
 /**
  * To use, import like this:
  * const Canvas = dynamic(() => import('../components/Canvas'), { ssr: false });
  */
-const Canvas = (props: CanvasProps): ReactElement => {
+const Canvas = (props) => {
    const { setup, tick, timeout, width, height, ...rest } = props;
    const canvasRef = useRef(null);
 
@@ -30,7 +21,7 @@ const Canvas = (props: CanvasProps): ReactElement => {
 
    useEffect(() => {
       if (canvasRef && canvasRef.current) {
-         const canvas: HTMLCanvasElement = canvasRef.current;
+         const canvas = canvasRef.current;
          const context = canvas.getContext('2d');
 
          setup(context);

@@ -1,7 +1,6 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
 
-const Books: NextPage = () => {
+const Books = () => {
 return (
    <div>
       <Head>

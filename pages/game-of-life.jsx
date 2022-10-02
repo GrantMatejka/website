@@ -1,12 +1,13 @@
+import { useEffect, useMemo, useState } from 'react';
+
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
-import { useEffect, useState, useMemo, ReactElement } from 'react';
 
 const Canvas = dynamic(() => import('../components/Canvas'), { ssr: false });
 
 const CELL_SIZE = 6; //px
 
-const loadWasmInstance = async (importObject: any) => {
+const loadWasmInstance = async (importObject) => {
    const fetchPromise = fetch('game-of-life.wasm');
    const { instance } = await WebAssembly.instantiateStreaming(
       fetchPromise,
@@ -15,14 +16,14 @@ const loadWasmInstance = async (importObject: any) => {
    return instance;
 };
 
-const GameOfLife = (): ReactElement => {
+const GameOfLife = () => {
    const [instance, setInstance] = useState(null);
 
    const memory = useMemo(() => new WebAssembly.Memory({ initial: 1 }), []);
-   const gridHeight = (instance as any)?.exports.get_grid_height() ?? 0;
-   const gridWidth = (instance as any)?.exports.get_grid_width() ?? 0;
+   const gridHeight = instance?.exports.get_grid_height() ?? 0;
+   const gridWidth = instance?.exports.get_grid_width() ?? 0;
    const cellsStartPtr =
-      (instance as any)?.exports.get_cell_start_index() ?? null;
+      instance?.exports.get_cell_start_index() ?? null;
 
    useEffect(() => {
       // store cell in memory and just loop through and 0 is dead and 1 is alive
@@ -33,10 +34,10 @@ const GameOfLife = (): ReactElement => {
          },
       };
 
-      loadWasmInstance(importObject).then((inst: any) => setInstance(inst));
+      loadWasmInstance(importObject).then((inst) => setInstance(inst));
    }, [memory]);
 
-   const drawGridAndCells = (context: any) => {
+   const drawGridAndCells = (context) => {
       const DEAD = 0;
       const ALIVE = 1;
       const GRID_COLOR = '#CCCCCC';
@@ -101,7 +102,7 @@ const GameOfLife = (): ReactElement => {
    };
 
    if (instance) {
-      (instance as any).exports.init_cells();
+      instance.exports.init_cells();
    }
 
    return (
@@ -116,7 +117,7 @@ const GameOfLife = (): ReactElement => {
                   width={(CELL_SIZE + 1) * gridWidth + 1}
                   height={(CELL_SIZE + 1) * gridHeight + 1}
                   setup={drawGridAndCells}
-                  tick={(instance as any).exports.tick}
+                  tick={instance.exports.tick}
                   timeout={50}
                />
             )}

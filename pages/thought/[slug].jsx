@@ -1,20 +1,11 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import { GetStaticProps, GetStaticPaths } from 'next';
-import ReactMarkdown from 'react-markdown';
 import Head from 'next/head';
-import { ReactElement } from "react";
+import ReactMarkdown from 'react-markdown';
+import fs from "fs";
+import matter from "gray-matter";
 import parseFrontMatter from '../../utils/frontMatterParser';
-import type { FrontMatter } from '../../utils/frontMatterParser';
+import path from "path";
 
-type ThoughtProps = {
-  frontMatter: FrontMatter,
-  slug: string,
-  content: string
-};
-
-export default function Thought({ content, slug, frontMatter }: ThoughtProps): ReactElement {
+export default function Thought({ content, slug, frontMatter }) {
   return (
     <div>
     <Head>
@@ -30,7 +21,7 @@ export default function Thought({ content, slug, frontMatter }: ThoughtProps): R
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths = async () => {
   const files = fs.readdirSync(`${process.cwd()}/thoughts`);
 
   const paths = files.map((filename) => ({
@@ -45,7 +36,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps = async (context) => {
   if (!context.params) {
     return { props: {}, };
   }
