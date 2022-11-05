@@ -1,3 +1,4 @@
+import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 
 import Head from 'next/head';
@@ -29,71 +30,102 @@ const createNewTodo = (text, dueTime) => {
    return newTodo;
 };
 
+const todoSorter = (t1, t2) => {
+   const greater =
+      t1.date.toString().substring(0, 15) < t2.date.toString().substring(0, 15);
+   if (greater) return -1;
+   if (!greater) return 1;
+   if (parseInt(t1.dueTime) < parseInt(t2.dueTime)) return -1;
+   if (parseInt(t1.dueTime) > parseInt(t2.dueTime)) return 1;
+   return 0;
+};
+
+const removeTodo = (todos, id) => {
+   const newTodos = todos.filter((el) => el.id !== id);
+   fullySetTodos(newTodos);
+};
+
 const Bonbon = () => {
-   const [dateRange, setDateRange] = useState(15);
+   const [dayCount, setDayCount] = useState(7);
    const [todos, setTodos] = useState([]);
 
-   const fullySetTodos = ((newTodos, sort = false) => {
-      if (sort) {
-         const todoSorter = (t1, t2) => {
-            const greater = t1.date.toString().substring(0, 15) < t2.date.toString().substring(0, 15);
-            if (greater) return -1;
-            if (!greater) return 1;
-            if (parseInt(t1.dueTime) < parseInt(t2.dueTime)) return -1;
-            if (parseInt(t1.dueTime) > parseInt(t2.dueTime)) return 1;
-            return 0;
-         };
+   useEffect(() => {
+      const storedTodos = localStorage.getItem('todos');
 
+      if (storedTodos == null) {
+         localStorage.setItem('todos', JSON.stringify([]));
+      } else {
+         setTodos(JSON.parse(storedTodos));
+      }
+   }, []);
+
+   const updateTodos = (newTodos, sort = false) => {
+      if (sort) {
          newTodos.sort(todoSorter);
       }
 
       localStorage.setItem('todos', JSON.stringify(newTodos));
       setTodos(newTodos);
-   });
-
-   const removeTodo = ((id) => {
-      const newTodos = todos.filter((el) => el.id !== id);
-      fullySetTodos(newTodos);
-   });
+   };
 
    const clearTodos = () => {
       setTodos([]);
       localStorage.setItem('todos', JSON.stringify([]));
    };
 
-   const todoFormSubmission = ((e) => {
+   const handleSubmit = (e) => {
       e.preventDefault();
-      const todos = JSON.parse(localStorage.getItem('todos') ?? '[]');
-      console.log(todos);
-      todos.push('hey');
-
-      fullySetTodos(todos);
       console.log(e);
-      //TODO: create todo here
-   });
+   };
 
-   useEffect(() => {
-      const storedTodos = localStorage.getItem('todos');
-      if (storedTodos == null) {
-         localStorage.setItem('todos', JSON.stringify([]));
-      } else {
-         const parsedTodos = JSON.parse(storedTodos);
-         setTodos(parsedTodos);
-      }
-   }, []);
+   const dayCountOptions = [
+      { value: 1, label: 'Today' },
+      { value: 7, label: 'This Week' },
+      { value: 14, label: 'Two Weeks' },
+   ];
 
    return (
-      <div>
+      <div style={{ paddingTop: 15 }}>
          <Head>
             <title>Bonbon</title>
          </Head>
-         <button onClick={() => setDateRange(1)}>Today</button>
-         <button onClick={() => setDateRange(7)}>Week</button>
-         <button onClick={() => setDateRange(14)}>Two Weeks</button>
-         <button onClick={clearTodos}>clear</button>
-         <p>{dateRange}</p>
 
-         <form id="form" autoComplete="off" onSubmit={todoFormSubmission}>
+         <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div
+               style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+               }}
+            >
+               <div
+                  style={{ width: '30%', textAlign: 'right', marginRight: 10 }}
+               >
+                  <h2 style={{ margin: 0, padding: 0 }}>BonBon:</h2>
+               </div>
+               <div style={{ width: '70%' }}>
+                  <FormControl variant="outlined" style={{ minWidth: 200 }}>
+                     <InputLabel id="select-day-count">
+                        Days to Display
+                     </InputLabel>
+                     <Select
+                        labelId="select-day-count"
+                        id="select-day-count"
+                        value={dayCount}
+                        label="Days to Display"
+                        onChange={(e) => setDayCount(e.target.value)}
+                     >
+                        <MenuItem value={1}>Today</MenuItem>
+                        <MenuItem value={7}>This Week</MenuItem>
+                        <MenuItem value={14}>Two Weeks</MenuItem>
+                     </Select>
+                  </FormControl>
+               </div>
+            </div>
+         </div>
+
+         <form autoComplete="off" onSubmit={handleSubmit}>
             <input type="text" id="todo-description" autoComplete="off" />
             <input type="number" id="input-time" min="1" max="24" />
             <button id="add-todo" type="submit">

@@ -1,69 +1,62 @@
-import { CgPushChevronDown, CgPushChevronUp } from 'react-icons/cg';
+import { Home, LibraryBooks } from '@material-ui/icons';
 
-import Link from 'next/link';
-import styles from '../styles/Header.module.css';
-import { useState } from 'react';
+import ContactInfoBlurb from './ContactInfoBlurb';
+import StyledLink from './StyledLink';
+import { Terminal } from '@mui/icons-material';
+import { colors } from '../utils/colors';
+import styled from 'styled-components';
 import useWindowDimensions from '../utils/windowDimensions';
 
-const ContactInfo = () => {
-   return (
-      <div className={styles.contact}>
-         <a href="mailto:grantmatejka1@gmail.com">grantmatejka1@gmail.com</a>
-         <span>
-            <Link href="https://www.linkedin.com/in/grantmatejka/">
-               <a rel="noreferrer" target="_blank">
-                  LinkedIn
-               </a>
-            </Link>
-            {', '}
-            <Link href="https://github.com/GrantMatejka">
-               <a rel="noreferrer" target="_blank">
-                  GitHub
-               </a>
-            </Link>
-            {', '}
-            <Link href="/GrantMatejkaResume.pdf">
-               <a rel="noreferrer" target="_blank">
-                  Resume
-               </a>
-            </Link>
-         </span>
-      </div>
-   );
-};
+const NO_CONTACT_SIZE = 1000;
+const MOBILE = 650;
+
+const LinkContainer = styled.div`
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+`;
+
+const HeaderContainer = styled.header`
+   position: sticky;
+   top: 0;
+   box-shadow: 0 5px 15px -5px ${colors.black};
+
+   width: 100%;
+
+   padding: 0.5em 0;
+
+   background-color: ${colors.black};
+
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+`;
 
 export default function Header() {
    const { width } = useWindowDimensions();
-   const [open, setOpen] = useState(false);
 
-   const toggleOpen = () => {
-      setOpen(!open);
-   };
-
-   const isNotMobile = width > 600;
+   const showContact = width > NO_CONTACT_SIZE;
+   const isMobile = width < MOBILE;
 
    return (
-      <header>
-         {open || isNotMobile ? (
-            <div className={styles.container}>
-               <Link href="/">
-                  <a className={styles.link}>Home</a>
-               </Link>
-               <Link href="/blog">
-                  <a className={styles.link}>Thoughts</a>
-               </Link>
-               <ContactInfo />
-               <button className={styles.mobileBtn} onClick={toggleOpen}>
-                  <CgPushChevronUp />
-               </button>
-            </div>
-         ) : (
-            <div className={styles.container}>
-               <button className={styles.mobileBtn} onClick={toggleOpen}>
-                  <CgPushChevronDown />
-               </button>
-            </div>
-         )}
-      </header>
+      <HeaderContainer className="full">
+         <StyledLink size="M" key="home-link" href="/">
+            <LinkContainer>
+               {isMobile ? <Home fontSize="large" /> : 'Home'}
+            </LinkContainer>
+         </StyledLink>
+         {/* <StyledLink size="M" key="projects-link" href="/projects">
+            <LinkContainer>
+               {isMobile ? <Terminal fontSize="large" /> : 'Projects'}
+            </LinkContainer>
+         </StyledLink> */}
+         <StyledLink size="M" key="thoughts-link" href="/posts">
+            <LinkContainer>
+               {isMobile ? <LibraryBooks fontSize="large" /> : 'Thoughts'}
+            </LinkContainer>
+         </StyledLink>
+         {showContact && <ContactInfoBlurb key="contact-info" />}
+      </HeaderContainer>
    );
 }

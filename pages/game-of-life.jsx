@@ -48,9 +48,6 @@ const GameOfLife = () => {
       context.beginPath();
       context.strokeStyle = GRID_COLOR;
 
-      console.log(gridWidth);
-      console.log(gridHeight);
-
       // vertical
       for (let i = 0; i <= gridWidth; i++) {
          context.moveTo(i * (CELL_SIZE + 1) + 1, 0);
