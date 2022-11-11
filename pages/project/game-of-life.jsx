@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 
-const Canvas = dynamic(() => import('../components/Canvas'), { ssr: false });
+const Canvas = dynamic(() => import('../../components/Canvas'), { ssr: false });
 
 const CELL_SIZE = 6; //px
 
@@ -22,8 +22,7 @@ const GameOfLife = () => {
    const memory = useMemo(() => new WebAssembly.Memory({ initial: 1 }), []);
    const gridHeight = instance?.exports.get_grid_height() ?? 0;
    const gridWidth = instance?.exports.get_grid_width() ?? 0;
-   const cellsStartPtr =
-      instance?.exports.get_cell_start_index() ?? null;
+   const cellsStartPtr = instance?.exports.get_cell_start_index() ?? null;
 
    useEffect(() => {
       // store cell in memory and just loop through and 0 is dead and 1 is alive

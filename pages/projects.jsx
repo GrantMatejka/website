@@ -1,21 +1,37 @@
 import Head from 'next/head';
 import React from 'react';
+import { Table } from '../components/Table';
+
+const PROJECTS = [
+   {
+      frontMatter: {
+         title: 'Rasm',
+         description: 'A Racket to WebAssembly Compiler',
+         buttonText: 'read',
+      },
+      key: 'rasm',
+      href: '/post/rasm',
+      as: '/post/rasm',
+   },
+   // {
+   //    frontMatter: {
+   //       title: 'BonBon',
+   //       description: 'A small kanban board for organizing life tasks',
+   //       buttonText: 'demo',
+   //    },
+   //    key: 'bonbon',
+   //    href: '/project/bonbon',
+   //    as: '/project/bonbon',
+   // },
+];
 
 export default function Projects({}) {
    return (
-      <div className="full">
+      <>
          <Head>
             <title>Projects</title>
          </Head>
-         <div>
-            <p>Some Project Stuff</p>
-         </div>
-         <div
-            style={{
-               height: '50px',
-               backgroundColor: 'red',
-            }}
-         ></div>
-      </div>
+         <Table entries={PROJECTS} />
+      </>
    );
 }
