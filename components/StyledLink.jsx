@@ -6,7 +6,8 @@ const StyledLinkContainer = styled.a`
    text-decoration: underline;
    text-decoration-color: transparent;
 
-   padding: 0.25em;
+   padding: ${(props) =>
+      props.padding !== undefined ? props.padding : '0.25em'};
 
    text-align: center;
 
@@ -41,6 +42,7 @@ const StyledLink = (props) => {
    return (
       <Link href={linkProps.href} as={linkProps.as} passHref>
          <StyledLinkContainer
+            padding={linkProps.padding}
             style={{
                fontSize: size[props.size],
             }}

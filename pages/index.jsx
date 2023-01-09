@@ -13,6 +13,19 @@ const Container = styled.div`
 
    text-align: center;
    height: 80vh;
+
+   @media only screen and (max-width: 400px) {
+      text-align: left;
+   }
+`;
+
+const StyledLinkPadding = styled.div`
+   padding-left: 3em;
+   padding-right: 3em;
+
+   @media only screen and (max-width: 400px) {
+      padding: 0;
+   }
 `;
 
 const IconRow = styled.div`
@@ -20,16 +33,21 @@ const IconRow = styled.div`
    flex-direction: row;
    align-items: center;
    justify-content: center;
+
+   @media only screen and (max-width: 400px) {
+      justify-content: space-between;
+   }
 `;
 
 const Title = styled.h1`
    text-transform: uppercase;
    font-size: 5em;
+   font-weight: 500;
 
    margin-bottom: 0;
 
-   @media only screen and (max-width: 750px) {
-      font-size: 3.5em;
+   @media only screen and (max-width: 400px) {
+      font-size: 4em;
    }
 `;
 
@@ -37,8 +55,9 @@ const Text = styled.h3`
    font-size: 1.75em;
    padding: 0.5em;
 
-   @media only screen and (max-width: 750px) {
+   @media only screen and (max-width: 400px) {
       font-size: 1.5em;
+      padding-left: 0;
    }
 `;
 
@@ -56,33 +75,42 @@ const Home = () => {
             <Title>{'Grant Matejka'}</Title>
             <Text>{'Sofware Engineer, Amongst Other Things'}</Text>
             <IconRow>
-               <StyledLink
-                  dark={true}
-                  size="XL"
-                  href="https://www.linkedin.com/in/grantmatejka/"
-                  rel="noreferrer"
-                  target="_blank"
-               >
-                  <IoLogoLinkedin />
-               </StyledLink>
-               <StyledLink
-                  dark={true}
-                  size="XL"
-                  href="https://github.com/GrantMatejka"
-                  rel="noreferrer"
-                  target="_blank"
-               >
-                  <IoLogoGithub />
-               </StyledLink>
-               <StyledLink
-                  dark={true}
-                  size="XL"
-                  href="/GrantMatejkaResume.pdf"
-                  rel="noreferrer"
-                  target="_blank"
-               >
-                  <IoNewspaperOutline />
-               </StyledLink>
+               <StyledLinkPadding>
+                  <StyledLink
+                     dark={true}
+                     size="XL"
+                     padding={0}
+                     href="https://www.linkedin.com/in/grantmatejka/"
+                     rel="noreferrer"
+                     target="_blank"
+                  >
+                     <IoLogoLinkedin />
+                  </StyledLink>
+               </StyledLinkPadding>
+               <StyledLinkPadding>
+                  <StyledLink
+                     dark={true}
+                     size="XL"
+                     padding={0}
+                     href="https://github.com/GrantMatejka"
+                     rel="noreferrer"
+                     target="_blank"
+                  >
+                     <IoLogoGithub />
+                  </StyledLink>
+               </StyledLinkPadding>
+               <StyledLinkPadding>
+                  <StyledLink
+                     dark={true}
+                     size="XL"
+                     padding={0}
+                     href="/GrantMatejkaResume.pdf"
+                     rel="noreferrer"
+                     target="_blank"
+                  >
+                     <IoNewspaperOutline />
+                  </StyledLink>
+               </StyledLinkPadding>
             </IconRow>
          </Container>
       </>

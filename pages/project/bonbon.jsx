@@ -11,18 +11,8 @@ import { useEffect, useState } from 'react';
 
 import Head from 'next/head';
 import MomentUtils from '@date-io/moment';
-
-let count = 0;
-
-const daysOfWeek = [
-   'Sunday',
-   'Monday',
-   'Tuesday',
-   'Wednesday',
-   'Thursday',
-   'Friday',
-   'Saturday',
-];
+import moment from 'moment/moment';
+import { v4 as uuid } from 'uuid';
 
 const DAY_DISPLAY_MENU_OPTIONS = [
    { value: 1, label: 'Today' },
@@ -30,68 +20,61 @@ const DAY_DISPLAY_MENU_OPTIONS = [
    { value: 14, label: 'Two Weeks' },
 ];
 
-const createNewTodo = (text, dueTime) => {
-   const creationDate = new Date();
-
-   const newTodo = {
-      date: creationDate.toISOString().split('T')[0],
-      text: text,
-      dueTime: dueTime,
-      id: count,
+const createNewTask = (description, dueTime) => {
+   return {
+      id: uuid(),
+      date: moment().unix(),
+      description: description,
+      dueTime: dueTime ? dueTime.unix() : 0,
    };
-
-   count += 1;
-
-   return newTodo;
 };
 
-const todoSorter = (t1, t2) => {
-   const greater =
-      t1.date.toString().substring(0, 15) < t2.date.toString().substring(0, 15);
-   if (greater) return -1;
-   if (!greater) return 1;
-   if (parseInt(t1.dueTime) < parseInt(t2.dueTime)) return -1;
-   if (parseInt(t1.dueTime) > parseInt(t2.dueTime)) return 1;
-   return 0;
-};
+const taskSorter = (t1, t2) => {
+   const dateDifference = t1.date < t2.date;
+   if (dateDifference !== 0) {
+      return dateDifference;
+   }
 
-const removeTodo = (todos, id) => {
-   const newTodos = todos.filter((el) => el.id !== id);
-   fullySetTodos(newTodos);
+   return t1.dueTime - t2.dueTime;
 };
 
 const Bonbon = () => {
    const [dayCount, setDayCount] = useState(7);
-   const [todos, setTodos] = useState([]);
-   const [value, setValue] = useState(null);
+   const [tasks, setTasks] = useState([]);
+   const [formInput, setFormInput] = useState({
+      description: '',
+      dueTime: null,
+   });
 
+   // We refer to local store on the initial load to populate any saved state
    useEffect(() => {
-      const storedTodos = localStorage.getItem('todos');
+      const storedTasks = localStorage.getItem('tasks');
 
-      if (storedTodos == null) {
-         localStorage.setItem('todos', JSON.stringify([]));
+      if (storedTasks == null) {
+         localStorage.setItem('tasks', JSON.stringify([]));
       } else {
-         setTodos(JSON.parse(storedTodos));
+         setTasks(JSON.parse(storedTasks));
       }
    }, []);
 
-   const updateTodos = (newTodos, sort = false) => {
-      if (sort) {
-         newTodos.sort(todoSorter);
-      }
+   // Whenever our state changes, update local storage
+   useEffect(() => {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+   }, [tasks]);
 
-      localStorage.setItem('todos', JSON.stringify(newTodos));
-      setTodos(newTodos);
+   const addTask = (newTask) => {
+      const newTasks = [...tasks, newTask].sort(taskSorter);
+      setTasks(newTasks);
    };
 
-   const clearTodos = () => {
-      setTodos([]);
-      localStorage.setItem('todos', JSON.stringify([]));
+   const removeTask = (id) => {
+      const newTasks = tasks.filter((el) => el.id !== id);
+      setTasks(newTasks);
    };
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      console.log(e);
+      addTask(createNewTask(formInput.description, formInput.dueTime));
    };
 
    return (
@@ -145,14 +128,24 @@ const Bonbon = () => {
                      variant="outlined"
                      required
                      label={'Task Description'}
+                     value={formInput.description}
+                     onChange={(newValue) => {
+                        const newFormInput = { ...formInput };
+                        newFormInput.description = newValue.target.value;
+                        setFormInput(newFormInput);
+                     }}
                      style={{ marginRight: '1em' }}
                   />
                   <TimePicker
                      inputVariant="outlined"
                      label="Task Due Time"
-                     value={value}
+                     value={formInput.dueTime}
+                     clearable={true}
                      onChange={(newValue) => {
-                        setValue(newValue);
+                        const newFormInput = { ...formInput };
+                        console.log(newValue);
+                        newFormInput.dueTime = newValue;
+                        setFormInput(newFormInput);
                      }}
                      ampm={false}
                      style={{ height: '4em' }}
@@ -167,11 +160,11 @@ const Bonbon = () => {
                </FormControl>
             </form>
 
-            <p>{todos.length}</p>
-            {todos.map((e, i) => (
+            <p>{tasks.length}</p>
+            {tasks.map((e, i) => (
                <div key={i}>
                   <p>
-                     {i} {e}
+                     {i} {e.description}
                   </p>
                </div>
             ))}

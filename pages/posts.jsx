@@ -1,28 +1,35 @@
 import Head from 'next/head';
-import { Table } from '../../components/Table';
+import { Table } from '../components/Table';
 import fs from 'fs';
 import matter from 'gray-matter';
-import parseFrontMatter from '../../utils/frontMatterParser';
+import parseFrontMatter from '../utils/frontMatterParser';
+import styled from 'styled-components';
 
 const dateSorter = (e1, e2) => e2.frontMatter.date - e1.frontMatter.date;
+
+const Container = styled.div`
+   margin-top: 1em;
+`;
 
 export default function Posts({ posts }) {
    return (
       <>
          <Head>
-            <title>Thoughts</title>
+            <title>{'Thoughts'}</title>
          </Head>
-         <Table
-            entries={posts.map((post) => ({
-               frontMatter: {
-                  ...post.frontMatter,
-                  buttonText: 'read',
-               },
-               key: post.slug,
-               as: `/post/${post.slug}`,
-               href: '/post/[slug]',
-            }))}
-         />
+         <Container>
+            <Table
+               entries={posts.map((post) => ({
+                  frontMatter: {
+                     ...post.frontMatter,
+                     buttonText: 'read',
+                  },
+                  key: post.slug,
+                  as: `/post/${post.slug}`,
+                  href: '/post/[slug]',
+               }))}
+            />
+         </Container>
       </>
    );
 }

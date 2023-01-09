@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
 import { Table } from '../components/Table';
+import styled from 'styled-components';
 
 const PROJECTS = [
    {
@@ -13,17 +14,21 @@ const PROJECTS = [
       href: '/post/rasm',
       as: '/post/rasm',
    },
-   // {
-   //    frontMatter: {
-   //       title: 'BonBon',
-   //       description: 'A small kanban board for organizing life tasks',
-   //       buttonText: 'demo',
-   //    },
-   //    key: 'bonbon',
-   //    href: '/project/bonbon',
-   //    as: '/project/bonbon',
-   // },
+   {
+      frontMatter: {
+         title: 'BonBon',
+         description: 'A small kanban board for organizing life tasks',
+         buttonText: 'demo',
+      },
+      key: 'bonbon',
+      href: '/project/bonbon',
+      as: '/project/bonbon',
+   },
 ];
+
+const Container = styled.div`
+   margin-top: 1em;
+`;
 
 export default function Projects({}) {
    return (
@@ -31,7 +36,9 @@ export default function Projects({}) {
          <Head>
             <title>Projects</title>
          </Head>
-         <Table entries={PROJECTS} />
+         <Container>
+            <Table entries={PROJECTS} />
+         </Container>
       </>
    );
 }

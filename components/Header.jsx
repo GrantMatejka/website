@@ -46,11 +46,11 @@ export default function Header() {
                {isMobile ? <Home fontSize="large" /> : 'Home'}
             </LinkContainer>
          </StyledLink>
-         <StyledLink size="M" key="projects-link" href="/projects">
+         {/* <StyledLink size="M" key="projects-link" href="/projects">
             <LinkContainer>
                {isMobile ? <Terminal fontSize="large" /> : 'Projects'}
             </LinkContainer>
-         </StyledLink>
+         </StyledLink> */}
          <StyledLink size="M" key="thoughts-link" href="/posts">
             <LinkContainer>
                {isMobile ? <LibraryBooks fontSize="large" /> : 'Thoughts'}
