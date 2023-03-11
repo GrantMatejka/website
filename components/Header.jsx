@@ -22,14 +22,16 @@ const HeaderContainer = styled.header`
    top: 0;
    box-shadow: 0 5px 15px -5px ${colors.black};
 
+   height: 60px;
    width: 100%;
 
-   padding: 0.5em 0;
+   padding: 0;
 
    background-color: ${colors.black};
 
    display: flex;
    flex-direction: row;
+   align-items: center;
    justify-content: space-around;
 `;
 
