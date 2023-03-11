@@ -7,6 +7,8 @@ import styled from 'styled-components';
 import { useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
 
+const TITLE = 'BonBon [wip]';
+
 const FormContainer = styled.div`
    height: 20%;
 `;
@@ -141,7 +143,7 @@ const Bonbon = () => {
    return (
       <>
          <Head>
-            <title>Bonbon</title>
+            <title>{TITLE}</title>
          </Head>
          <div className="full" style={{ height: 'calc(100vh - 60px)' }}>
             <FormContainer id="form-div">
@@ -163,7 +165,7 @@ const Bonbon = () => {
                         justifyContent: 'center',
                      }}
                   >
-                     <h1>BonBon</h1>
+                     <h1>{TITLE}</h1>
                      <div>
                         <label htmlFor="select-day-count">
                            Days to Display:
