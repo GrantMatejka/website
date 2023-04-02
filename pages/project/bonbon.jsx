@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import { Close } from '@material-ui/icons';
+import { Check } from '@material-ui/icons';
 import Head from 'next/head';
-import moment from 'moment/moment';
 import styled from 'styled-components';
 import { useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
-
-const TITLE = 'BonBon [wip]';
 
 const FormContainer = styled.div`
    height: 20%;
@@ -21,17 +18,28 @@ const BodyContainer = styled.div`
    height: 80%;
 `;
 
+const DateHeader = styled.h2`
+   height: 10%;
+   margin: 0;
+
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+`;
+
 const DayContainer = styled.div`
    display: inline-block;
 
-   height: 98%;
+   height: 95%;
    width: 250px;
 
    min-width: 0;
 
    margin: 5px;
+   padding: 5px;
 
    border: black 1px solid;
+   border-radius: 5px;
 `;
 
 const DayTaskColumn = styled.div`
@@ -41,26 +49,58 @@ const DayTaskColumn = styled.div`
    overflow-y: auto;
 `;
 
+const TaskContainer = styled.div`
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+
+   width: 100%;
+`;
+
 const TaskDescription = styled.p`
    text-overflow: ellipsis;
    overflow: hidden;
    white-space: nowrap;
+
+   font-size: 18px;
+`;
+
+const TaskCompleteButton = styled.button`
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   :hover {
+      cursor: pointer;
+   }
 `;
 
 const DAY_DISPLAY_MENU_OPTIONS = [
    { value: 1, label: 'Today' },
-   { value: 7, label: 'This Week' },
+   { value: 4, label: 'Half Week' },
+   { value: 7, label: 'Week' },
    { value: 14, label: 'Two Weeks' },
 ];
 
+/**
+ * Creates a  default task item, with a random ID
+ *
+ * @param {string} description
+ * @param {string} dueDate in ISO format
+ * @returns Task
+ */
 const createNewTask = (description, dueDate) => {
    return {
       id: uuid(),
-      dueDate: dueDate ?? moment().format('YYYY-MM-DD'),
+      dueDate: dueDate ?? new Date().toISOString(),
       description: description,
    };
 };
 
+/**
+ * Sorts tasks by due date and then alphabetically by description
+ */
 const taskSorter = (t1, t2) => {
    const dateDifference = t1.dueDate < t2.dueDate;
    if (dateDifference !== 0) {
@@ -69,6 +109,8 @@ const taskSorter = (t1, t2) => {
 
    return t1.description - t2.description;
 };
+
+const TITLE = 'BonBon [wip]';
 
 const DEFAULT_FORM_INPUT = {
    description: '',
@@ -118,14 +160,21 @@ const Bonbon = () => {
       setFormInput(DEFAULT_FORM_INPUT);
    };
 
-   const daysToDisplay = useMemo(
-      () =>
-         Array(dayCount)
-            .fill(0)
-            .map((_e, i) => moment().add(i, 'day').format('YYYY-MM-DD')),
-      [dayCount]
-   );
+   const daysToDisplay = useMemo(() => {
+      const today = new Date();
 
+      // Iterate through how many days we add the index to 'today' to calculate what day we need
+      return Array(dayCount)
+         .fill(new Date())
+         .map((date, i) => {
+            date.setDate(today.getDate() + i);
+            return date.toISOString();
+         });
+   }, [dayCount]);
+
+   /**
+    * Each task, keyed by due date and any outdated events get put into the first date bucket
+    */
    const dayKeyedTasks = useMemo(
       () =>
          tasks.reduce((days, task) => {
@@ -242,34 +291,30 @@ const Bonbon = () => {
                         moveTask(droppedTaskId, day);
                      }}
                   >
-                     <h2 style={{ height: '10%', margin: 0, padding: 0 }}>
-                        {moment(day).format('MM-DD')}
-                     </h2>
+                     <DateHeader>
+                        {new Intl.DateTimeFormat(undefined, {
+                           dateStyle: 'medium',
+                        }).format(new Date(day))}
+                     </DateHeader>
                      <DayTaskColumn>
                         {(dayKeyedTasks[day] ?? []).map((task, i) => (
-                           <div
+                           <TaskContainer
                               key={task.id}
                               draggable={true}
                               onDragStart={(e) => {
                                  e.dataTransfer.setData('text/plain', task.id);
                                  e.dataTransfer.effectAllowed = 'move';
                               }}
-                              style={{
-                                 display: 'flex',
-                                 flexDirection: 'row',
-                                 alignItems: 'center',
-                                 justifyContent: 'space-between',
-
-                                 width: '100%',
-                              }}
                            >
                               <TaskDescription>
                                  {task.description}
                               </TaskDescription>
-                              <button onClick={() => removeTask(task.id)}>
-                                 <Close />
-                              </button>
-                           </div>
+                              <TaskCompleteButton
+                                 onClick={() => removeTask(task.id)}
+                              >
+                                 <Check fontSize="small" />
+                              </TaskCompleteButton>
+                           </TaskContainer>
                         ))}
                      </DayTaskColumn>
                   </DayContainer>
