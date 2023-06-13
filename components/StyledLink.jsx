@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { colors } from '../utils/colors';
 import styled from 'styled-components';
+import { colors } from '../utils/colors';
 
 const StyledLinkContainer = styled.a`
    text-decoration: underline;
@@ -16,7 +16,7 @@ const StyledLinkContainer = styled.a`
    min-width: 100px;
    border-radius: 0.5em;
 
-   transition: all 300ms ease;
+   transition: all 250ms ease-in;
 
    &:hover {
       color: ${(props) => (props.dark ? colors.blackHover : colors.whiteHover)};

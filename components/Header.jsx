@@ -1,18 +1,18 @@
 import { Home, LibraryBooks } from '@material-ui/icons';
 
+import { Terminal } from '@mui/icons-material';
+import styled from 'styled-components';
+import { colors } from '../utils/colors';
+import useWindowDimensions from '../utils/windowDimensions';
 import ContactInfoBlurb from './ContactInfoBlurb';
 import StyledLink from './StyledLink';
-import { Terminal } from '@mui/icons-material';
-import { colors } from '../utils/colors';
-import styled from 'styled-components';
-import useWindowDimensions from '../utils/windowDimensions';
 
 const NO_CONTACT_SIZE = 1000;
 const MOBILE = 650;
 
 const LinkContainer = styled.div`
    display: flex;
-   flex-direction: row;
+   flex-direction: ${(props) => props.isMobile ? 'column' : 'row'};
    justify-content: center;
    align-items: center;
 `;
@@ -26,6 +26,8 @@ const HeaderContainer = styled.header`
    width: 100%;
 
    padding: 0;
+   padding-top: 0.5em;
+   padding-bottom: 0.5em;
 
    background-color: ${colors.black};
 
@@ -33,6 +35,17 @@ const HeaderContainer = styled.header`
    flex-direction: row;
    align-items: center;
    justify-content: space-around;
+`;
+
+
+const MobileLinkText = styled.h2`
+   font-size: ${(props) => props.isMobile ? '16px' : '24px'};
+   font-weight: 400;
+
+   margin: 0;
+   padding: 0;
+
+   padding-left: ${(props) => props.isMobile ? 0 : '8px'};
 `;
 
 export default function Header() {
@@ -44,18 +57,18 @@ export default function Header() {
    return (
       <HeaderContainer className="full">
          <StyledLink size="M" key="home-link" href="/">
-            <LinkContainer>
-               {isMobile ? <Home fontSize="large" /> : 'Home'}
+            <LinkContainer isMobile={isMobile}>
+               <Home fontSize="large" /><MobileLinkText isMobile={isMobile}>{'Home'}</MobileLinkText>
             </LinkContainer>
          </StyledLink>
          <StyledLink size="M" key="projects-link" href="/projects">
-            <LinkContainer>
-               {isMobile ? <Terminal fontSize="large" /> : 'Projects'}
+            <LinkContainer isMobile={isMobile}>
+               <Terminal fontSize="large" /><MobileLinkText isMobile={isMobile}>{'Projects'}</MobileLinkText>
             </LinkContainer>
          </StyledLink>
          <StyledLink size="M" key="thoughts-link" href="/posts">
-            <LinkContainer>
-               {isMobile ? <LibraryBooks fontSize="large" /> : 'Thoughts'}
+            <LinkContainer isMobile={isMobile}>
+              <LibraryBooks fontSize="large" /><MobileLinkText isMobile={isMobile}>{'Thoughts'}</MobileLinkText>
             </LinkContainer>
          </StyledLink>
          {showContact && <ContactInfoBlurb key="contact-info" />}

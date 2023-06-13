@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 
 import { Check } from '@material-ui/icons';
 import Head from 'next/head';
-import styled from 'styled-components';
 import { useMemo } from 'react';
+import styled from 'styled-components';
 import { v4 as uuid } from 'uuid';
 
 const FormContainer = styled.div`
@@ -297,7 +297,7 @@ const Bonbon = () => {
                         }).format(new Date(day))}
                      </DateHeader>
                      <DayTaskColumn>
-                        {(dayKeyedTasks[day] ?? []).map((task, i) => (
+                        {(dayKeyedTasks[day] ?? []).map((task) => (
                            <TaskContainer
                               key={task.id}
                               draggable={true}
