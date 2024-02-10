@@ -1,5 +1,6 @@
 import { CommandMenu } from '@/components/command-menu';
 import { ProjectCard } from '@/components/project-card';
+import { ReadingCard } from '@/components/reading-card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -191,6 +192,7 @@ export default function Page() {
               />
             ))}
           </div>
+
           {RESUME_DATA.writings.length > 0 && (
             <>
               <h2 className="text-xl font-bold">Writing Blurbs</h2>
@@ -202,6 +204,25 @@ export default function Page() {
                     description={writing.description}
                     tags={writing.tags}
                     link={'link' in writing ? writing.link.href : undefined}
+                  />
+                ))}
+              </div>
+            </>
+          )}
+
+          {RESUME_DATA.readings.length > 0 && (
+            <>
+              <h2 className="text-xl font-bold">Some Readings</h2>
+              <div className="-mx-3 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 print:grid-cols-3 print:gap-2">
+                {RESUME_DATA.readings.map((reading) => (
+                  <ReadingCard
+                    key={reading.title}
+                    title={reading.title}
+                    author={reading.author}
+                    review={reading.review}
+                    rating={reading.rating}
+                    tags={reading.tags}
+                    link={reading?.link ? reading.link.href : undefined}
                   />
                 ))}
               </div>

@@ -10,6 +10,18 @@ type WritingEntry = {
   };
 };
 
+type ReadingEntry = {
+  title: string;
+  author: string;
+  tags: string[];
+  review: string;
+  rating: number;
+  link?: {
+    label?: string;
+    href: string;
+  };
+};
+
 export const RESUME_DATA = {
   name: 'Grant Matejka',
   initials: 'GM',
@@ -107,6 +119,62 @@ export const RESUME_DATA = {
       }
     }
   ],
+  readings: [
+    {
+      title: 'Code',
+      author: 'Charles Petzold',
+      tags: ['Computers', 'Engineering', 'Education'],
+      review:
+        'Walking from braille to assembly; one of the greatest computer programming books ever written',
+      rating: 5,
+      link: {
+        href: 'https://www.amazon.com/Code-Language-Computer-Hardware-Software/dp/0137909101'
+      }
+    },
+    {
+      title: 'Zero to One',
+      author: 'Peter Thiel',
+      tags: ['Startups', 'Engineering', 'Education'],
+      review:
+        'Short and sweet collection of lectures challenging the status quo of startups and the industry of innovation',
+      rating: 4.5,
+      link: {
+        href: 'https://www.amazon.com/Zero-One-Notes-Startups-Future/dp/080413929'
+      }
+    },
+    {
+      title: 'The War of Art',
+      author: 'Steven Pressfield',
+      tags: ['Philosophy', 'Creative'],
+      review: 'Short and inspiring read for pursuing creative ventures',
+      rating: 4,
+      link: {
+        href: 'https://www.amazon.com/War-Art-Through-Creative-Battles/dp/1936891026'
+      }
+    },
+    {
+      title: 'There the Wizards Stay Up Late',
+      author: 'Katie Hafner & Matthew Lyon',
+      tags: ['Internet', 'History', 'Engineering'],
+      review:
+        'Engaging historical account of the birth and adoption of the ARPANET',
+      rating: 4,
+      link: {
+        href: 'https://www.amazon.com/Where-Wizards-Stay-Up-Late/dp/0684832674/'
+      }
+    },
+    {
+      title: 'The Design of Everyday Things',
+      author: 'Don Norman',
+      tags: ['HCI', 'Design', 'Philosphy', 'Classic'],
+      review:
+        "An all time classic of design and humans' interactions with the world",
+      rating: 4.5,
+      link: {
+        href: 'https://www.amazon.com/Design-Everyday-Things-Revised-Expanded/dp/0465050654'
+      }
+    }
+  ] as ReadingEntry[],
   writings: [] as WritingEntry[]
   // [
   //   {
