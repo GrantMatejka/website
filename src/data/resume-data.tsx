@@ -99,7 +99,7 @@ export const RESUME_DATA = {
     },
     {
       title: 'Advent of Code',
-      techStack: ['Side Project', 'TypeScript', 'Next.js', 'WebAssembly'],
+      techStack: ['Side Project', 'Python', 'Algorithms', 'Data Structures'],
       description: 'Basic wasm program I wrote by hand in learning wasm',
       link: {
         label: 'github.com/grantmatejka/AdventOfCode',
