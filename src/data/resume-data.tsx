@@ -153,7 +153,7 @@ export const RESUME_DATA = {
       }
     },
     {
-      title: 'There the Wizards Stay Up Late',
+      title: 'Where the Wizards Stay Up Late',
       author: 'Katie Hafner & Matthew Lyon',
       tags: ['Internet', 'History', 'Engineering'],
       review:
