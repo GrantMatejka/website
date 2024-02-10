@@ -13,14 +13,15 @@ For context, I have just recently (~15 weeks ago) started my post baccalaureate 
 I spent much of my last academic quarter working to find an advisor I'd be honored to work with and a project topic that would benefit from said advisor's experience, as well as edify the both of us. The project topic I landed on is WebAssembly.
 
 I decided on WebAssembly for many reasons, but some of these are:
+
 - My experience in web dev
-- *[hot take]* The future/present of development is the web
+- _[hot take]_ The future/present of development is the web
 - WebAssembly (wasm) is a very promising technology
 - My advisor has experience and connections with the technology and community
 - I believe in the vision of wasm
 - It provides many opportunities for projects
 
-On the last point, one thing I am most excited about, as I am still in the research phase, are the possibilities for projects I can pursue under the wasm umbrella. I think as a masters student this technology gives me the opportunity to spend time in the fantasyland of concepts and  theories while also getting plenty of opportunities to get a workout in the rough and tough reality of software development. These two worlds fascinate me a lot. I love balancing theory and practice. Maybe someday I will write some of my thoughts on 'good ideas' and how they can easily transform into unmaintained hacks in the codebase. 
+On the last point, one thing I am most excited about, as I am still in the research phase, are the possibilities for projects I can pursue under the wasm umbrella. I think as a masters student this technology gives me the opportunity to spend time in the fantasyland of concepts and theories while also getting plenty of opportunities to get a workout in the rough and tough reality of software development. These two worlds fascinate me a lot. I love balancing theory and practice. Maybe someday I will write some of my thoughts on 'good ideas' and how they can easily transform into unmaintained hacks in the codebase.
 
 Now what is my thesis right now? This is probably going to change but here is my idea...
 

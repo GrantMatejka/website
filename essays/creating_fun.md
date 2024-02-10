@@ -19,7 +19,7 @@ I'd have to make sure to minify and compress and coerce or else my 1 monthly vis
 Now clearly, this story is a bit exaggerated. These concerns are completely unwarranted.
 My performance was still well in the green and my site continued to sit.
 
-I strongly believe in keeping things as simple as they need to be. 
+I strongly believe in keeping things as simple as they need to be.
 I try and fight the urge of premature optimization every day.
 And yes, there comes a time when optimizations are no longer premature, but for any and every case I find my personal site in, almost any worry is premature.
 
@@ -27,7 +27,7 @@ My old site was simple. It worked and displayed information and had a few links 
 But that didn't mean it was perfect.
 I wanted to have a site where I could put stuff, and not just text or markup, but a site where I could put anything.
 I wanted a site where I could have fun. Where I could experiment with new technologies and techniques.
-My old site did not really allow this. 
+My old site did not really allow this.
 
 I could do many things, but many things I couldn't.
 
@@ -46,7 +46,7 @@ So yeah, I decided to jump into nextjs.
 I decided to try and make this fun again.
 
 I recently read [this](https://www.infoworld.com/article/3639521/svelte-creator-web-development-should-be-more-fun.html) interview with the svelte creator, and in it they touch on how web development should be fun.
-Not only this, but they describe framework development as `playful'. 
+Not only this, but they describe framework development as `playful'.
 In a world of React vs Angular vs Vue vs insert framework here, I never would have thought something thinks this should be fun.
 But then it reminded me, this should be fun.
 

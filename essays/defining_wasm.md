@@ -18,7 +18,7 @@ Due to the abstract nature of wasm, a lot of leeway is given to the implementors
 
 ### Runtime
 
-WebAssembly may be a byte-code, but it is a byte-code intended to be run in a virtual machine (VM). This is the layer of WebAssembly most developers and engineers will find themselves most familiar with in practice. To generate the byte-code a developer would simply specify a compiler flag, but to actually execute the generated code the developer would rely on the wasm runtime. Each of the four major browser vendors have implemented a wasm runtime (Chrome, Firefox, Edge, Safari), but there are various efforts to implement vm's outside the browser. This allows engineers to take advantage of wasm outside of the browser in settings like the cloud and IoT. There are a few nuances and differences between each runtime, so much so that going into a deep dive of the runtimes would require a more dedicated piece. 
+WebAssembly may be a byte-code, but it is a byte-code intended to be run in a virtual machine (VM). This is the layer of WebAssembly most developers and engineers will find themselves most familiar with in practice. To generate the byte-code a developer would simply specify a compiler flag, but to actually execute the generated code the developer would rely on the wasm runtime. Each of the four major browser vendors have implemented a wasm runtime (Chrome, Firefox, Edge, Safari), but there are various efforts to implement vm's outside the browser. This allows engineers to take advantage of wasm outside of the browser in settings like the cloud and IoT. There are a few nuances and differences between each runtime, so much so that going into a deep dive of the runtimes would require a more dedicated piece.
 
 The biggest importance of the runtime is that this is where your wasm code come alive. You may experience minor performance differences, but all runtimes guarantee the promises of wasm (speed, security, portable). Another important aspect of the runtimes is that there are more in the works. These projects serve as a reminder of the dedicated community of wasm contributors.
 
@@ -26,7 +26,7 @@ The biggest importance of the runtime is that this is where your wasm code come 
 
 WebAssembly was built for the web. The web is a platform, but also the web is a community. The social implications of this decision is clear as WebAssembly is being built with a defined MVP and constant iteration. This combined with the open source nature and emphasis of the technology creates a community surrounding wasm that is active and engaged. High skilled from around the world are contributing to the goals outlined by wasm and believe in its future.
 
-Not only are individual engineers collaborating, but we also see clear and dedicated collaboration between corporations. Companies like Google and Mozilla are actively working together and investing together, because they see the value of wasm and the power of its promises. 
+Not only are individual engineers collaborating, but we also see clear and dedicated collaboration between corporations. Companies like Google and Mozilla are actively working together and investing together, because they see the value of wasm and the power of its promises.
 
 ### Conclusion
 

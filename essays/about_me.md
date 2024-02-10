@@ -4,6 +4,7 @@ description: Some Info and Background on who I am
 date: 2021-09-01
 tags: featured
 ---
+
 # About Me
 
 My education, professional experience and personal interest has lead me to experiment with and develop skills in anything from Algorithms to Data structures to Full Stack Web Development to Game Design/Development and so much more. Utilizing knowledge of numerous Programming Languages (Java, JavaScript, C#, C++, C, ...) and Frameworks (React Native, ASP.NET Core 3.0, Blazor, ...) I have had a thrill exploring and growing in the field of Software Development. My coding experience that isn't able to be described fully here is available on my GitHub, including numerous projects and experiments. For insight into my work experience please refer to my LinkedIn or download my resume.
@@ -34,7 +35,6 @@ Fall 2017 - Spring 2021
 
 GPA: 3.87+
 
-
 **Pursuing Master's in Computer Science**
 
 Expected completion Spring 2022
@@ -42,6 +42,7 @@ Expected completion Spring 2022
 ---
 
 ## Skills
+
 Languages
 
 - JavaScript (professional)
