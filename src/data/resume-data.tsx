@@ -68,12 +68,22 @@ export const RESUME_DATA = {
   ],
   work: [
     {
+      company: 'Andesite',
+      link: 'https://andesite.ai',
+      badges: ['Remote'],
+      title: 'Software Engineer',
+      start: 'Jun 2024',
+      end: undefined,
+      description:
+        'Joined fresh out of stealth, as a full stack engineer, on a lean and seasoned team. Building the future of cyber threat decision making utilizing cutting edge technology and AI research.'
+    },
+    {
       company: 'Tulip Interfaces',
       link: 'https://tulip.co',
       badges: ['Hybrid'],
       title: 'Software Engineer',
-      start: '2022',
-      end: undefined,
+      start: 'July 2022',
+      end: 'Jun 2024',
       description:
         'Member of small team of engineers responsible with scoping and building of automated workflow product. Scoped, developed and tested flowchart/no-code editor for building said workflows. Built compiler and runtime to compile custom no-code AST to JavaScript, to be run in a sandboxed WebAssembly environment (QuickJS). Designed, standardized and built out public API’s across the engineering org'
     },
