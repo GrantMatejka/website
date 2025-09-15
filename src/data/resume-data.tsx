@@ -27,7 +27,7 @@ export const RESUME_DATA = {
   initials: 'GM',
   location: 'Boston, MA',
   about:
-    'Full-stack engineer who loves to build in fast paced/startup environments',
+    'Senrior full-stack engineer who loves to build in fast paced/startup environments',
   summary:
     "As an engineer, I've built product verticals end users love and rely on. Building real things and shipping true value is what I love. With a Master's in CS and expertise in TypeScript, React, WebAssembly and Node, I've delivered production systems across a variety of contexts (e.g. microservices, api's, compilers, etc).",
   avatarUrl: undefined,
@@ -38,11 +38,6 @@ export const RESUME_DATA = {
       {
         name: 'GitHub',
         url: 'https://github.com/grantmatejka',
-        icon: GitHubIcon
-      },
-      {
-        name: 'Professional GitHub',
-        url: 'https://github.com/gmatejka-tulip',
         icon: GitHubIcon
       },
       {
@@ -71,11 +66,11 @@ export const RESUME_DATA = {
       company: 'Andesite',
       link: 'https://andesite.ai',
       badges: ['Remote'],
-      title: 'Software Engineer',
+      title: 'Senior Software Engineer',
       start: 'Jun 2024',
       end: undefined,
       description:
-        'Joined fresh out of stealth, as a full stack engineer, on a lean and seasoned team. Building the future of cyber threat decision making utilizing cutting edge technology and AI research.'
+        'Joined fresh out of stealth, as a full stack engineer and engineering leader, on a lean and seasoned team. Building the future of cyber threat decision making utilizing cutting edge technology and AI research.'
     },
     {
       company: 'Tulip Interfaces',
