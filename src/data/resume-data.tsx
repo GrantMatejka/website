@@ -179,8 +179,8 @@ export const RESUME_DATA = {
         href: 'https://www.amazon.com/Design-Everyday-Things-Revised-Expanded/dp/0465050654'
       }
     }
-  ] as ReadingEntry[],
-  writings: [] as WritingEntry[]
+  ] satisfies ReadingEntry[],
+  writings: [] satisfies WritingEntry[]
   // [
   //   {
   //     title: 'Rasm',
