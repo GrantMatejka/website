@@ -27,7 +27,7 @@ export const RESUME_DATA = {
   initials: 'GM',
   location: 'Boston, MA',
   about:
-    'Senrior full-stack engineer who loves to build in fast paced/startup environments',
+    'Senior full-stack engineer who loves to build in fast paced/startup environments',
   summary:
     "As an engineer, I've built product verticals end users love and rely on. Building real things and shipping true value is what I love. With a Master's in CS and expertise in TypeScript, React, WebAssembly and Node, I've delivered production systems across a variety of contexts (e.g. microservices, api's, compilers, etc).",
   avatarUrl: undefined,
