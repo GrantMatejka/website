@@ -117,7 +117,7 @@ export const RESUME_DATA = {
     {
       title: 'Advent of Code',
       techStack: ['Side Project', 'Python', 'Algorithms', 'Data Structures'],
-      description: 'Basic wasm program I wrote by hand in learning wasm',
+      description: 'Fun annual event of various programming challenges',
       link: {
         label: 'github.com/grantmatejka/AdventOfCode',
         href: 'https://github.com/grantmatejka/AdventOfCode'
