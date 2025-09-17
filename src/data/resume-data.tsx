@@ -180,7 +180,7 @@ export const RESUME_DATA = {
       }
     }
   ] satisfies ReadingEntry[],
-  writings: [] satisfies WritingEntry[]
+  writings: [] as WritingEntry[]
   // [
   //   {
   //     title: 'Rasm',
