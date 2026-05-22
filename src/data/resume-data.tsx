@@ -27,13 +27,13 @@ export const RESUME_DATA = {
   initials: 'GM',
   location: 'Boston, MA',
   about:
-    'Senior full-stack engineer who loves to build in fast paced/startup environments',
+    "Product-minded software engineer with a Master's in Computer Science",
   summary:
-    "As an engineer, I've built product verticals end users love and rely on. Building real things and shipping true value is what I love. With a Master's in CS and expertise in TypeScript, React, WebAssembly and Node, I've delivered production systems across a variety of contexts (e.g. microservices, api's, compilers, etc).",
+    'Product-minded software engineer with experience building and scaling B2B and B2C products across AI, workflow automation, and small business software. Strong full-stack background spanning TypeScript, React, Node.js, Python/FastAPI, distributed systems, and agentic AI systems. Experienced leading cross-functional initiatives from architecture through launch in high-growth startup environments.',
   avatarUrl: undefined,
   contact: {
     email: 'grantmatejka1@gmail.com',
-    resume: 'GrantMatejkaResume.pdf',
+    resume: 'GrantMatejka_Resume.pdf',
     social: [
       {
         name: 'GitHub',
@@ -50,27 +50,27 @@ export const RESUME_DATA = {
   education: [
     {
       school: 'California Polytechnic State University, San Luis Obispo',
-      degree: "Master's Degree in Computer Science",
+      degree: "Master's Degree in Computer Science (with Distinction)",
       start: '2021',
       end: '2022'
     },
     {
       school: 'California Polytechnic State University, San Luis Obispo',
-      degree: "Bachelor's Degree in Software Engineering",
+      degree: "Bachelor's Degree in Software Engineering (Summa Cum Laude)",
       start: '2017',
       end: '2021'
     }
   ],
   work: [
     {
-      company: 'Andesite',
+      company: 'Andesite AI',
       link: 'https://andesite.ai',
       badges: ['Remote'],
       title: 'Senior Software Engineer',
-      start: 'Jun 2024',
+      start: 'Jul 2024',
       end: undefined,
       description:
-        'Joined fresh out of stealth, as a full stack engineer and engineering leader, on a lean and seasoned team. Building the future of cyber threat decision making utilizing cutting edge technology and AI research.'
+        "Led roadmap planning, technical architecture, and cross-functional engineering delivery; team delivered 85% of projects on or ahead of schedule. Designed and built the core multi-agent framework using proprietary infrastructure and LangChain, with extensive evaluation suites. Productionized an internal FastAPI proof-of-concept into a scalable platform with auth/authz, async job processing, and generated type-safe API clients. Shipped full-stack product features across React, TypeScript, Python, FastAPI, Postgres, and AWS while mentoring engineers."
     },
     {
       company: 'Tulip Interfaces',
@@ -78,32 +78,45 @@ export const RESUME_DATA = {
       badges: ['Hybrid'],
       title: 'Software Engineer',
       start: 'July 2022',
-      end: 'Jun 2024',
+      end: 'July 2024',
       description:
-        'Member of small team of engineers responsible with scoping and building of automated workflow product. Scoped, developed and tested flowchart/no-code editor for building said workflows. Built compiler and runtime to compile custom no-code AST to JavaScript, to be run in a sandboxed WebAssembly environment (QuickJS). Designed, standardized and built out public API’s across the engineering org'
+        'Built, launched, and maintained a core customer-facing no-code workflow editor using TypeScript, Node, React, Redux, and D3, informed by user and A/B testing. Built and maintained a compiler/runtime that compiles a custom AST to JavaScript for execution in a sandboxed WebAssembly environment (QuickJS) in an event-driven RabbitMQ ecosystem. Authored specs and architecture for scheduled workflows while rolling out microservice patterns (dynamic sharding, outbox) and public REST APIs.'
     },
     {
       company: 'iFixit',
       link: 'https://ifixit.com',
       badges: ['Hybrid'],
-      title: 'Software Engineering Apprentice',
+      title: 'Part Time Software Developer',
       start: 'Nov. 2020',
       end: 'Jan. 2022',
       description:
-        'Responsible for maintenance of legacy codebase, with active conversion to modern systems. Did full stack development across highly structured/OOP, PHP backend and JS/React/NextJs frontend. Contributed heavily to conversion of custom built ecommerce engine to Shopify. Utilized Agile management across hybrid team with thorough quality assurance and code review practices. Wrote unit/integration/functional tests for continuous integration and deployment pipelines'
+        'Maintained a large legacy codebase while helping modernize systems supporting 10+ million MAU. Delivered full-stack features across an OOP-heavy PHP backend and JS/React/Next.js frontend. Worked in an agile hybrid team with strong QA and code review practices.'
     },
     {
       company: 'The Parable Group',
       link: 'https://parablegroup.com',
       badges: ['Onsite'],
-      title: 'Software Engineer Intern',
-      start: 'Jan. 2020',
+      title: 'Part Time Software Developer',
+      start: 'Jan 2020',
       end: 'Dec. 2020',
       description:
-        'Full stack SPA development using ASP.NET Core 3, the Blazor framework and Azure. Was responsible for the development of production website features and continuous research. Built an entire product offering from concept, to prototype, to launch'
+        'Built full-stack SPAs using C#, ASP.NET Core 3, Blazor, and Azure. Independently took a product offering from concept to prototype to launch, including Azure CI/CD.'
     }
   ],
-  skills: ['JavaScript', 'TypeScript', 'React', 'Node.js', 'WebAssembly'],
+  skills: [
+    'TypeScript',
+    'JavaScript',
+    'React',
+    'Postgres',
+    'Node.js',
+    'Full Stack',
+    'REST API',
+    'Microservices',
+    'Distributed Systems',
+    'Agentic AI',
+    'Python',
+    'FastAPI'
+  ],
   projects: [
     {
       title: 'Rasm',
